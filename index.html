@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Signal Desk</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Agent controls">
+        <div class="brand">
+          <div class="brand-mark">SD</div>
+          <div>
+            <h1>Signal Desk</h1>
+            <p data-i18n="brandSubtitle">Paper trading agent for Bitget AI Hackathon</p>
+          </div>
+        </div>
+
+        <div class="language-toggle" role="group" aria-label="Language">
+          <button class="lang-option active" data-lang="en" type="button">EN</button>
+          <button class="lang-option" data-lang="zh" type="button">中文</button>
+        </div>
+
+        <nav class="desk-map" aria-label="Desk map">
+          <div class="section-label" data-i18n="deskMap">Desk Map</div>
+          <div class="desk-map-grid">
+            <button type="button" data-jump="market" data-i18n="navMarket">Market</button>
+            <button type="button" data-jump="book" data-i18n="navBook">Book</button>
+            <button type="button" data-jump="context" data-i18n="navContext">Context</button>
+            <button type="button" data-jump="risk" data-i18n="navRisk">Risk</button>
+            <button type="button" data-jump="passport" data-i18n="navPassport">Passport</button>
+            <button type="button" data-jump="ops" data-i18n="navOps">Ops</button>
+            <button type="button" data-jump="log" data-i18n="navLog">Log</button>
+          </div>
+        </nav>
+
+        <section class="control-section">
+          <div class="section-label" data-i18n="market">Market</div>
+          <label>
+            <span data-i18n="pair">Pair</span>
+            <select id="pairSelect">
+              <option value="BTCUSDT">BTC/USDT</option>
+              <option value="ETHUSDT">ETH/USDT</option>
+              <option value="SOLUSDT">SOL/USDT</option>
+              <option value="LINKUSDT">LINK/USDT</option>
+            </select>
+          </label>
+          <label>
+            <span data-i18n="timeframe">Timeframe</span>
+            <select id="timeframeSelect">
+              <option value="15m" data-i18n="tf15">15m scalp</option>
+              <option value="1h" selected data-i18n="tf1h">1h swing</option>
+              <option value="4h" data-i18n="tf4h">4h position</option>
+              <option value="1day" data-i18n="tf1d">1 day macro</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="control-section">
+          <div class="section-label" data-i18n="risk">Risk</div>
+          <label>
+            <span data-i18n="riskPerIdea">Risk per idea</span>
+            <div class="slider-row">
+              <input id="riskSlider" type="range" min="0.5" max="3" step="0.25" value="1.25" />
+              <strong id="riskValue">1.25%</strong>
+            </div>
+          </label>
+          <label>
+            <span data-i18n="agentMode">Agent mode</span>
+            <select id="modeSelect">
+              <option value="balanced" selected data-i18n="balanced">Balanced</option>
+              <option value="conservative" data-i18n="conservative">Conservative</option>
+              <option value="aggressive" data-i18n="aggressive">Aggressive</option>
+            </select>
+          </label>
+        </section>
+
+        <div class="action-stack">
+          <button class="primary" id="analyzeBtn">
+            <span data-i18n="analyze">Analyze Market</span>
+          </button>
+          <button class="secondary" id="simulateBtn">
+            <span data-i18n="simulate">Run Paper Trade</span>
+          </button>
+          <button class="ghost" id="refreshBtn">
+            <span data-i18n="refreshData">Refresh Data</span>
+          </button>
+        </div>
+
+        <div class="compliance-note" data-i18n="compliance">
+          Demo mode only. No live orders, no custody, no financial advice.
+        </div>
+
+        <section class="readiness-card" aria-label="Hackathon readiness">
+          <div class="section-label" data-i18n="readiness">Readiness</div>
+          <div class="readiness-score">
+            <strong>78%</strong>
+            <span data-i18n="readinessLabel">submission-ready MVP</span>
+          </div>
+          <ul>
+            <li><span></span><p data-i18n="fitTheme">Fits Trading Agent track</p></li>
+            <li><span></span><p data-i18n="fitDemo">Working demo with README</p></li>
+            <li><span></span><p data-i18n="fitData">Uses Bitget public market data</p></li>
+            <li class="pending"><span></span><p data-i18n="fitMissing">Still needs public repo and 3-5 min video</p></li>
+          </ul>
+        </section>
+
+        <section class="boundary-card" aria-label="Demo boundary">
+          <div class="section-label" data-i18n="boundaryLedger">Boundary Ledger</div>
+          <div id="boundaryList" class="boundary-list"></div>
+        </section>
+
+        <section class="provenance-card" aria-label="Data provenance">
+          <div class="section-label" data-i18n="provenanceTape">Provenance Tape</div>
+          <div id="provenanceTape" class="provenance-tape"></div>
+        </section>
+
+        <section class="monitor-card" aria-label="System monitor">
+          <div class="section-label" data-i18n="systemMonitor">System Monitor</div>
+          <div id="systemMonitor" class="monitor-list"></div>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div class="hero-copy">
+            <div class="hero-kicker">
+              <p class="eyebrow" data-i18n="heroEyebrow">Pre-trade Risk Desk</p>
+              <button class="info-trigger" id="projectInfoBtn" type="button" aria-haspopup="dialog" aria-controls="projectInfoModal" data-i18n-aria="projectInfoOpen">i</button>
+            </div>
+            <h2 data-i18n="heroTitle">A council that can veto bad trades before they happen.</h2>
+          </div>
+          <div class="status-strip">
+            <div>
+              <span data-i18n="agent">Agent</span>
+              <strong id="agentStatus">Ready</strong>
+            </div>
+            <div>
+              <span data-i18n="confidence">Confidence</span>
+              <strong id="confidenceScore">--</strong>
+            </div>
+            <div>
+              <span data-i18n="sessionPnl">Session PnL</span>
+              <strong id="sessionPnl">$0.00</strong>
+            </div>
+          </div>
+        </header>
+
+        <section class="runway-grid" aria-label="Demo runway">
+          <article class="panel runway-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="demoRunway">Demo Runway</p>
+                <h3 data-i18n="runwayTitle">Submission flow</h3>
+              </div>
+              <span class="badge" id="runwayBadge">0/5</span>
+            </div>
+            <div id="demoRunway" class="runway-steps"></div>
+          </article>
+        </section>
+
+        <section class="market-grid" id="section-market">
+          <article class="panel chart-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow" data-i18n="liveSimulation">Live Simulation</p>
+                <h3 id="pairTitle">BTC/USDT</h3>
+              </div>
+              <div class="price-block">
+                <small id="dataSource"><i></i><span>Simulated</span></small>
+                <span id="lastPrice">$68,420.00</span>
+                <strong id="priceChange">+1.24%</strong>
+                <em id="lastUpdated">--</em>
+              </div>
+            </div>
+            <canvas id="priceChart" width="960" height="420" aria-label="Simulated price chart"></canvas>
+            <div class="signal-row">
+              <div>
+                <span data-i18n="trend">Trend</span>
+                <strong id="trendSignal">Awaiting analysis</strong>
+              </div>
+              <div>
+                <span data-i18n="volatility">Volatility</span>
+                <strong id="volatilitySignal">--</strong>
+              </div>
+              <div>
+                <span data-i18n="liquidity">Liquidity</span>
+                <strong id="liquiditySignal">--</strong>
+              </div>
+              <div>
+                <span data-i18n="newsPulse">News pulse</span>
+                <strong id="newsSignal">--</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel plan-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="generatedPlan">Generated Plan</p>
+                <h3 id="planAction">Stand by</h3>
+              </div>
+              <span class="badge" id="planBadge">Waiting</span>
+            </div>
+            <div class="metric-list">
+              <div><span data-i18n="entry">Entry</span><strong id="entryPrice">--</strong></div>
+              <div><span data-i18n="stop">Stop</span><strong id="stopPrice">--</strong></div>
+              <div><span data-i18n="target1">Target 1</span><strong id="targetOne">--</strong></div>
+              <div><span data-i18n="target2">Target 2</span><strong id="targetTwo">--</strong></div>
+              <div><span data-i18n="positionSize">Position size</span><strong id="positionSize">--</strong></div>
+              <div><span data-i18n="riskReward">Risk / reward</span><strong id="riskReward">--</strong></div>
+            </div>
+            <div class="thesis-box">
+              <span data-i18n="agentThesis">Agent thesis</span>
+              <p id="agentThesis">Choose a pair and run analysis to generate a trade plan with risk controls.</p>
+            </div>
+          </article>
+        </section>
+
+        <section class="fingerprint-grid">
+          <article class="panel fingerprint-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="marketFingerprint">Market Fingerprint</p>
+                <h3 data-i18n="candleMatrix">Candle matrix</h3>
+              </div>
+              <span class="badge" id="fingerprintBadge">OHLCV</span>
+            </div>
+            <div id="fingerprintMatrix" class="fingerprint-matrix"></div>
+          </article>
+        </section>
+
+        <section class="book-grid" id="section-book">
+          <article class="panel book-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="orderBookPulse">Order Book Pulse</p>
+                <h3 data-i18n="depthImbalance">Depth imbalance</h3>
+              </div>
+              <span class="badge" id="bookSource">--</span>
+            </div>
+            <div class="book-visual">
+              <div class="book-bar">
+                <span id="bidDepthBar"></span>
+                <span id="askDepthBar"></span>
+              </div>
+              <div class="book-stats">
+                <div><span data-i18n="bidDepth">Bid depth</span><strong id="bidDepth">--</strong></div>
+                <div><span data-i18n="askDepth">Ask depth</span><strong id="askDepth">--</strong></div>
+                <div><span data-i18n="spread">Spread</span><strong id="spreadValue">--</strong></div>
+                <div><span data-i18n="imbalance">Imbalance</span><strong id="imbalanceValue">--</strong></div>
+              </div>
+              <div class="risk-radar" id="riskRadar"></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="context-grid" id="section-context">
+          <article class="panel context-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="contextFeed">Context Feed</p>
+                <h3 data-i18n="headlineTape">Headline tape</h3>
+              </div>
+              <span class="badge" id="contextSource">--</span>
+            </div>
+            <div class="context-board">
+              <div id="contextMeter" class="context-meter"></div>
+              <div id="contextFeedList" class="context-feed-list"></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="regime-grid">
+          <article class="panel regime-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="regimeMap">Regime Map</p>
+                <h3 id="regimeTitle">--</h3>
+              </div>
+              <span class="badge" id="regimeBadge">--</span>
+            </div>
+            <div class="regime-board">
+              <div id="regimeMapPlot" class="regime-map-plot"></div>
+              <div id="regimeReadout" class="regime-readout"></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="decision-grid" id="section-risk">
+          <article class="panel gate-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="tradeGate">Trade Gate</p>
+                <h3 id="gateDecision">No decision</h3>
+              </div>
+              <span class="badge" id="gateBadge">--</span>
+            </div>
+            <div class="gate-body">
+              <div class="gate-meter"><span id="gateMeter"></span></div>
+              <p id="gateReason" data-i18n="gateReasonEmpty">Run analysis to let the desk decide whether this trade is allowed.</p>
+            </div>
+          </article>
+
+          <article class="panel council-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="signalCouncil">Signal Council</p>
+                <h3 data-i18n="roleVotes">Role votes</h3>
+              </div>
+            </div>
+            <div id="councilList" class="council-list"></div>
+          </article>
+
+          <article class="panel stress-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="stressTape">Stress Tape</p>
+                <h3 data-i18n="scenarioTests">Scenario tests</h3>
+              </div>
+            </div>
+            <div id="stressList" class="stress-list"></div>
+          </article>
+        </section>
+
+        <section class="evidence-grid">
+          <article class="panel edge-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="edgeDecomposer">Edge Decomposer</p>
+                <h3 data-i18n="evidenceStack">Evidence stack</h3>
+              </div>
+              <span class="badge" id="edgeBadge">--</span>
+            </div>
+            <div id="edgeList" class="edge-list"></div>
+          </article>
+
+          <article class="panel harness-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="realityHarness">Reality Harness</p>
+                <h3 data-i18n="rollingReplay">Rolling replay</h3>
+              </div>
+              <span class="badge" id="harnessBadge">--</span>
+            </div>
+            <div id="harnessStats" class="harness-stats"></div>
+            <div id="harnessPaths" class="harness-paths"></div>
+          </article>
+        </section>
+
+        <section class="passport-grid" id="section-passport">
+          <article class="panel passport-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="decisionPassport">Decision Passport</p>
+                <h3 data-i18n="auditCard">Audit card</h3>
+              </div>
+              <div class="button-row">
+                <button class="ghost" id="passportBtn" data-i18n="issuePassport">Issue Passport</button>
+                <button class="ghost" id="copyPassportBtn" data-i18n="copySummary">Copy Summary</button>
+              </div>
+            </div>
+            <div id="passportCard" class="passport-card"></div>
+            <textarea id="passportSummary" class="passport-summary" readonly></textarea>
+          </article>
+        </section>
+
+        <section class="ops-grid" id="section-ops">
+          <article class="panel kill-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="killSwitch">Kill Switch Drill</p>
+                <h3 id="killTitle" data-i18n="killTitle">Run an execution incident drill</h3>
+              </div>
+              <button class="ghost" id="drillBtn" data-i18n="runDrill">Run Drill</button>
+            </div>
+            <div class="drill-board" id="drillBoard"></div>
+            <div class="shock-lab">
+              <div class="shock-controls">
+                <label>
+                  <span data-i18n="shockMove">Price shock</span>
+                  <input id="shockMove" type="range" min="0" max="12" step="1" value="4" />
+                </label>
+                <label>
+                  <span data-i18n="shockDepth">Depth removed</span>
+                  <input id="shockDepth" type="range" min="0" max="80" step="5" value="25" />
+                </label>
+                <label>
+                  <span data-i18n="shockLatency">Latency spike</span>
+                  <input id="shockLatency" type="range" min="0" max="1200" step="50" value="250" />
+                </label>
+              </div>
+              <div id="shockResult" class="shock-result"></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="bottom-grid" id="section-log">
+          <article class="panel orders-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="paperOrders">Paper Orders</p>
+                <h3 data-i18n="simulationBlotter">Simulation blotter</h3>
+              </div>
+              <button class="ghost" id="resetBtn" data-i18n="reset">Reset</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th data-i18n="time">Time</th>
+                    <th data-i18n="pair">Pair</th>
+                    <th data-i18n="side">Side</th>
+                    <th data-i18n="entry">Entry</th>
+                    <th data-i18n="exit">Exit</th>
+                    <th data-i18n="pnl">PnL</th>
+                  </tr>
+                </thead>
+                <tbody id="ordersBody">
+                  <tr class="empty-row">
+                    <td colspan="6" data-i18n="noTrades">No paper trades yet.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="panel log-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="agentMemory">Agent Memory</p>
+                <h3 data-i18n="decisionLog">Decision log</h3>
+              </div>
+            </div>
+            <ol id="decisionLog" class="decision-log">
+              <li><span data-i18n="ready">Ready</span><p data-i18n="waitingScan">Agent is waiting for a market scan.</p></li>
+            </ol>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="projectInfoModal" aria-hidden="true">
+      <section class="project-modal" role="dialog" aria-modal="true" aria-labelledby="projectInfoTitle">
+        <div class="project-modal-header">
+          <div>
+            <p class="eyebrow" data-i18n="projectInfoEyebrow">Project Brief</p>
+            <h3 id="projectInfoTitle" data-i18n="projectInfoTitle">Signal Desk</h3>
+          </div>
+          <button class="modal-close" id="projectInfoClose" type="button" data-i18n-aria="projectInfoClose">×</button>
+        </div>
+        <div class="project-modal-body">
+          <p data-i18n="projectInfoIntro">
+            Signal Desk is a pre-trade risk desk demo for the Bitget AI x Crypto Hackathon.
+          </p>
+          <p data-i18n="projectInfoBoundary">
+            It uses live market data when possible, while execution and stress testing remain simulated.
+          </p>
+          <div class="project-modal-grid">
+            <div>
+              <span data-i18n="projectInfoReal">Real where possible</span>
+              <strong data-i18n="projectInfoRealBody">Bitget candles, order book depth, and best-effort public headlines.</strong>
+            </div>
+            <div>
+              <span data-i18n="projectInfoDemo">Demo boundary</span>
+              <strong data-i18n="projectInfoDemoBody">No live orders, no custody, no financial advice.</strong>
+            </div>
+            <div>
+              <span data-i18n="projectInfoUnique">Unique workflow</span>
+              <strong data-i18n="projectInfoUniqueBody">Signal Council, Trade Gate, Regime Map, Reality Harness, and Decision Passport.</strong>
+            </div>
+          </div>
+          <p class="project-modal-note" data-i18n="projectInfoNote">
+            The goal is not to claim the agent always wins, but to show how a trading agent can explain sources, refuse weak trades, and leave an auditable decision trail.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

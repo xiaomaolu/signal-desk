@@ -1,0 +1,2103 @@
+const pairProfiles = {
+  BTCUSDT: { label: "BTC/USDT", base: 68420, bias: 0.32, volatility: 0.018, liquidity: "deep", news: "etfInflows" },
+  ETHUSDT: { label: "ETH/USDT", base: 3620, bias: 0.18, volatility: 0.022, liquidity: "deep", news: "l2Fees" },
+  SOLUSDT: { label: "SOL/USDT", base: 154.2, bias: 0.46, volatility: 0.038, liquidity: "strong", news: "developerActivity" },
+  LINKUSDT: { label: "LINK/USDT", base: 18.35, bias: -0.14, volatility: 0.031, liquidity: "moderate", news: "rangeFlows" },
+};
+
+const translations = {
+  en: {
+    brandSubtitle: "Pre-trade risk desk for Bitget AI Hackathon",
+    deskMap: "Desk Map",
+    navMarket: "Market",
+    navBook: "Book",
+    navContext: "Context",
+    navRisk: "Risk",
+    navPassport: "Passport",
+    navOps: "Ops",
+    navLog: "Log",
+    market: "Market",
+    pair: "Pair",
+    timeframe: "Timeframe",
+    tf15: "15m scalp",
+    tf1h: "1h swing",
+    tf4h: "4h position",
+    tf1d: "1 day macro",
+    risk: "Risk",
+    riskPerIdea: "Risk per idea",
+    agentMode: "Agent mode",
+    balanced: "Balanced",
+    conservative: "Conservative",
+    aggressive: "Aggressive",
+    analyze: "Analyze Market",
+    simulate: "Run Paper Trade",
+    refreshData: "Refresh Data",
+    compliance: "Demo mode only. No live orders, no custody, no financial advice.",
+    boundaryLedger: "Boundary Ledger",
+    boundaryLive: "Live",
+    boundaryDerived: "Derived",
+    boundarySim: "Sim",
+    boundaryLiveText: "Bitget public OHLCV candles and order book depth when the browser can reach the API.",
+    boundaryDerivedText: "Signals, council votes, and trade gate are deterministic demo logic.",
+    boundarySimText: "Paper execution, stress tape, and fallback candles are simulated.",
+    provenanceTape: "Provenance Tape",
+    tapeMarketTitle: "Market feed",
+    tapeMarketLive: "Bitget OHLCV + order book, {state}.",
+    tapeMarketFallback: "Local fallback candles, {state}.",
+    tapeDerivedTitle: "Desk logic",
+    tapeDerivedBody: "Council votes, gate score, radar, and shock lab are deterministic demo logic.",
+    tapeExecutionTitle: "Execution layer",
+    tapeExecutionBody: "No live orders. Paper trades are simulated with stop, target, and time-exit rules.",
+    decisionPassport: "Decision Passport",
+    auditCard: "Audit card",
+    issuePassport: "Issue Passport",
+    copySummary: "Copy Summary",
+    copied: "Copied",
+    copyFallback: "Summary ready below",
+    passportEmpty: "Run analysis, then issue a decision passport.",
+    passPair: "Pair",
+    passSource: "Data source",
+    passGate: "Gate",
+    passRadar: "Radar avg",
+    passBoundary: "Boundary",
+    passPlan: "Plan",
+    passTimestamp: "Issued",
+    passBoundaryText: "Live market feed, deterministic desk logic, simulated execution.",
+    systemMonitor: "System Monitor",
+    monitorCandles: "Candles",
+    monitorBook: "Book",
+    monitorRefresh: "Refresh",
+    monitorMarket: "Market",
+    monitorAuto: "Auto 15s",
+    monitorManual: "Manual",
+    readiness: "Readiness",
+    readinessLabel: "submission-ready MVP",
+    fitTheme: "Fits Trading Agent track",
+    fitDemo: "Working demo with README",
+    fitData: "Uses Bitget public market data",
+    fitMissing: "Still needs public repo and 3-5 min video",
+    demoRunway: "Demo Runway",
+    runwayTitle: "Submission flow",
+    runwayMarket: "Market scan",
+    runwayPlan: "Plan",
+    runwayGate: "Risk gate",
+    runwayPassport: "Passport",
+    runwayExecution: "Paper trade",
+    runwayPending: "Pending",
+    runwayActive: "Active",
+    runwayDone: "Done",
+    runwayBlocked: "Blocked",
+    heroEyebrow: "Pre-trade Risk Desk",
+    heroTitle: "A council that can veto bad trades before they happen.",
+    projectInfoOpen: "Open project introduction",
+    projectInfoClose: "Close project introduction",
+    projectInfoEyebrow: "Project Brief",
+    projectInfoTitle: "Signal Desk",
+    projectInfoIntro: "Signal Desk is a pre-trade risk desk demo for the Bitget AI x Crypto Hackathon. It behaves like a trading committee that reviews a setup before any execution is considered.",
+    projectInfoBoundary: "The desk uses real Bitget candles and order book data when the browser can reach the public API. Paper execution, stress tests, fallback candles, and risk votes stay in the demo layer.",
+    projectInfoReal: "Real where possible",
+    projectInfoRealBody: "Bitget candles, order book depth, and best-effort public headlines.",
+    projectInfoDemo: "Demo boundary",
+    projectInfoDemoBody: "No live orders, no custody, no financial advice.",
+    projectInfoUnique: "Unique workflow",
+    projectInfoUniqueBody: "Signal Council, Trade Gate, Regime Map, Reality Harness, and Decision Passport.",
+    projectInfoNote: "The goal is not to claim the agent always wins, but to show how a trading agent can explain sources, refuse weak trades, and leave an auditable decision trail.",
+    agent: "Agent",
+    confidence: "Confidence",
+    sessionPnl: "Session PnL",
+    liveSimulation: "Live Simulation",
+    marketFingerprint: "Market Fingerprint",
+    candleMatrix: "Candle matrix",
+    orderBookPulse: "Order Book Pulse",
+    depthImbalance: "Depth imbalance",
+    bidDepth: "Bid depth",
+    askDepth: "Ask depth",
+    spread: "Spread",
+    imbalance: "Imbalance",
+    bookLive: "Book live",
+    bookUnavailable: "Book unavailable",
+    contextFeed: "Context Feed",
+    headlineTape: "Headline tape",
+    contextLive: "News live",
+    contextFallback: "Fallback context",
+    contextLoading: "Loading context",
+    contextScore: "Context score",
+    contextEvents: "Events",
+    contextSourceNote: "Best-effort public crypto news feed. Headlines are read-only context, not trading signals by themselves.",
+    fallbackHeadline1: "BTC and ETH flows remain the primary driver for broad crypto risk appetite.",
+    fallbackHeadline2: "Altcoin beta remains sensitive to liquidity shifts and fast leverage resets.",
+    fallbackHeadline3: "Desk keeps context cautious when live news cannot be reached from the browser.",
+    regimeMap: "Regime Map",
+    regimeTrend: "Trend",
+    regimeVol: "Volatility",
+    regimeLiquidity: "Liquidity",
+    regimeContext: "Context",
+    regimeCalmUptrend: "Calm uptrend",
+    regimeHotMomentum: "Hot momentum",
+    regimeMeanRevert: "Mean reversion",
+    regimeRiskOff: "Risk-off chop",
+    regimeNoteCalmUptrend: "Trend is constructive while volatility remains contained.",
+    regimeNoteHotMomentum: "Momentum is strong, but volatility is crowding the setup.",
+    regimeNoteMeanRevert: "Market sits near the middle; avoid forcing direction.",
+    regimeNoteRiskOff: "Volatility and weak context argue for patience.",
+    riskRadar: "Risk radar",
+    radarSpread: "Spread",
+    radarDepth: "Depth",
+    radarVolume: "Volume",
+    radarRange: "Range",
+    trend: "Trend",
+    volatility: "Volatility",
+    liquidity: "Liquidity",
+    newsPulse: "Context layer",
+    generatedPlan: "Generated Plan",
+    entry: "Entry",
+    stop: "Stop",
+    target1: "Target 1",
+    target2: "Target 2",
+    positionSize: "Position size",
+    riskReward: "Risk / reward",
+    agentThesis: "Agent thesis",
+    paperOrders: "Paper Orders",
+    simulationBlotter: "Simulation blotter",
+    reset: "Reset",
+    time: "Time",
+    side: "Side",
+    exit: "Exit",
+    pnl: "PnL",
+    noTrades: "No paper trades yet.",
+    agentMemory: "Agent Memory",
+    decisionLog: "Decision log",
+    ready: "Ready",
+    analyzing: "Analyzing",
+    watching: "Watching",
+    simulating: "Simulating",
+    waitingScan: "Agent is waiting for a market scan.",
+    bitgetLive: "Bitget live",
+    simulated: "Simulated",
+    loadingData: "Loading data",
+    fallbackData: "Fallback data",
+    staleData: "Stale live data",
+    updated: "Updated {time}",
+    awaitingAnalysis: "Awaiting analysis",
+    standBy: "Stand by",
+    waiting: "Waiting",
+    noTrade: "No trade",
+    longSetup: "LONG setup",
+    shortSetup: "SHORT setup",
+    neutralRange: "Neutral range",
+    bullishMomentum: "Bullish momentum",
+    bearishPressure: "Bearish pressure",
+    elevated: "Elevated",
+    normal: "Normal",
+    deep: "Deep",
+    strong: "Strong",
+    moderate: "Moderate",
+    etfInflows: "ETF inflows steady",
+    l2Fees: "L2 fees cooling",
+    developerActivity: "Developer activity rising",
+    rangeFlows: "Range-bound flows",
+    noPlanThesis: "Choose a pair and run analysis to generate a trade plan with risk controls.",
+    waitThesis: "{pair} is not offering enough asymmetry. The context layer marks {news}, but price is still inside the recent range between {low} and {high}. Best action: wait for a breakout or reclaim.",
+    tradeThesis: "{pair} is showing {direction} with {liquidity} liquidity. The context layer marks {news}. The plan uses a defined stop and staged targets before any live execution is considered.",
+    upside: "upside continuation",
+    downside: "downside continuation",
+    planGeneratedTitle: "{side} plan generated",
+    planGeneratedBody: "Scanned {pair} on {timeframe}. Confidence {confidence}%. Risk budget {risk}% of demo equity.",
+    tradeSkippedTitle: "Trade skipped",
+    tradeSkippedBody: "The agent refused to force a setup because the expected reward did not clear the risk filter.",
+    gateBlockedTitle: "Blocked by Trade Gate",
+    gateBlockedBody: "The risk desk vetoed execution. Fix the setup or reduce risk before simulating.",
+    tradeClosedTitle: "Paper trade closed",
+    tradeClosedBody: "{side} {pair} exited at {exit} via {exitReason}, with {result} of {pnl}.",
+    takeProfit: "take-profit",
+    stopLoss: "stop-loss",
+    timeExit: "time exit",
+    profit: "profit",
+    loss: "loss",
+    resetTitle: "Session reset",
+    resetBody: "Cleared paper orders and reset demo PnL.",
+    timeframeChangedTitle: "Timeframe changed",
+    timeframeChangedBody: "Agent lens switched to {timeframe}. Run analysis to refresh the plan.",
+    dataLoadedTitle: "Bitget data loaded",
+    dataLoadedBody: "Pulled {count} candles for {pair} from Bitget public market data.",
+    dataFallbackTitle: "Using fallback data",
+    dataFallbackBody: "Live Bitget candles were unavailable, so the demo switched to local simulated candles.",
+    dataStaleTitle: "Keeping last live data",
+    dataStaleBody: "Refresh failed, so the desk kept the previous Bitget snapshot and marked it stale.",
+    contextLoadedTitle: "Context feed loaded",
+    contextLoadedBody: "Pulled {count} public crypto headlines for the context layer.",
+    contextFallbackTitle: "Using fallback context",
+    contextFallbackBody: "Live headlines were unavailable, so the desk marked context as fallback.",
+    tradeGate: "Trade Gate",
+    signalCouncil: "Signal Council",
+    roleVotes: "Role votes",
+    edgeDecomposer: "Edge Decomposer",
+    evidenceStack: "Evidence stack",
+    edgeEmpty: "Run analysis to decompose the setup into measurable evidence.",
+    edgeMomentum: "Momentum edge",
+    edgeLiquidity: "Liquidity edge",
+    edgeVolatility: "Volatility edge",
+    edgeContext: "Context edge",
+    edgeStress: "Stress edge",
+    edgeMomentumBody: "Recent slope versus the selected timeframe baseline.",
+    edgeLiquidityBody: "Order book spread, depth balance, and volume participation.",
+    edgeVolatilityBody: "Range heat and stop distance pressure.",
+    edgeContextBody: "Best-effort public headlines plus fallback context when news cannot load.",
+    edgeStressBody: "Scenario tests and execution incident sensitivity.",
+    realityHarness: "Reality Harness",
+    rollingReplay: "Rolling replay",
+    harnessEmpty: "Run analysis to replay the plan across recent candle windows.",
+    harnessWinRate: "Win rate",
+    harnessWorst: "Worst path",
+    harnessMedian: "Median PnL",
+    harnessWindows: "Windows",
+    harnessLiveNote: "Replay uses the latest loaded OHLCV windows. Execution is still simulated.",
+    stressTape: "Stress Tape",
+    scenarioTests: "Scenario tests",
+    gateReasonEmpty: "Run analysis to let the desk decide whether this trade is allowed.",
+    noDecision: "No decision",
+    allowTrade: "Allow trade",
+    cautionTrade: "Caution",
+    vetoTrade: "Veto",
+    gateAllow: "The desk allows the plan because signal quality, risk/reward, and stress tests are aligned.",
+    gateCaution: "The desk allows only a reduced-size paper trade. One or more risk reviewers raised concerns.",
+    gateVeto: "The desk blocks this trade. The setup does not survive the risk gate.",
+    momentumReviewer: "Momentum",
+    riskReviewer: "Risk",
+    liquidityReviewer: "Liquidity",
+    macroReviewer: "Context",
+    approve: "Approve",
+    caution: "Caution",
+    veto: "Veto",
+    voteMomentumOk: "Trend and recent slope support the proposed direction.",
+    voteMomentumBad: "Momentum does not confirm the proposed direction.",
+    voteRiskOk: "Risk/reward clears the desk minimum.",
+    voteRiskBad: "Reward does not compensate for stop distance.",
+    voteLiquidityOk: "Liquidity profile can absorb a demo entry.",
+    voteLiquidityBad: "Liquidity profile is thin for this setup.",
+    voteContextOk: "Context layer does not conflict with the plan.",
+    voteContextBad: "Context layer is not supportive enough.",
+    shockDown: "Adverse shock",
+    volatilityExpansion: "Volatility expansion",
+    lateEntry: "Late entry",
+    pass: "Pass",
+    watch: "Watch",
+    fail: "Fail",
+    stressShockBody: "Tests whether the stop survives an immediate adverse move.",
+    stressVolBody: "Checks whether wider volatility breaks the risk budget.",
+    stressLateBody: "Simulates chasing after a worse entry.",
+    killSwitch: "Kill Switch Drill",
+    killTitle: "Run an execution incident drill",
+    runDrill: "Run Drill",
+    drillLatency: "Latency",
+    drillSlippage: "Slippage",
+    drillExposure: "Exposure",
+    drillAction: "Action",
+    drillPass: "Normal",
+    drillWatch: "Reduce",
+    drillFail: "Freeze",
+    drillLoggedTitle: "Kill switch drill complete",
+    drillLoggedBody: "Execution safety check returned {action}: latency {latency}ms, slippage {slippage}bps, exposure {exposure}%.",
+    shockMove: "Price shock",
+    shockDepth: "Depth removed",
+    shockLatency: "Latency spike",
+    shockVerdict: "Verdict",
+    shockNotes: "Desk note",
+    shockNormal: "Normal",
+    shockReduce: "Reduce",
+    shockFreeze: "Freeze",
+    shockNormalNote: "Shock remains inside the demo risk envelope. Paper execution can continue.",
+    shockReduceNote: "Shock is elevated. The desk would cut size and re-check order book depth.",
+    shockFreezeNote: "Shock breaches limits. The desk freezes execution and waits for a fresh market read.",
+  },
+  zh: {
+    brandSubtitle: "面向 Bitget AI 黑客松的交易前风控台",
+    deskMap: "工作台地图",
+    navMarket: "市场",
+    navBook: "盘口",
+    navContext: "上下文",
+    navRisk: "风控",
+    navPassport: "护照",
+    navOps: "演练",
+    navLog: "日志",
+    market: "市场",
+    pair: "交易对",
+    timeframe: "周期",
+    tf15: "15分钟 短线",
+    tf1h: "1小时 波段",
+    tf4h: "4小时 持仓",
+    tf1d: "1日 宏观",
+    risk: "风险",
+    riskPerIdea: "单笔风险",
+    agentMode: "Agent 模式",
+    balanced: "均衡",
+    conservative: "保守",
+    aggressive: "进取",
+    analyze: "分析市场",
+    simulate: "运行模拟交易",
+    refreshData: "刷新数据",
+    compliance: "仅演示模式。不下真实订单，不托管资产，不构成投资建议。",
+    boundaryLedger: "边界账本",
+    boundaryLive: "真实",
+    boundaryDerived: "推导",
+    boundarySim: "模拟",
+    boundaryLiveText: "浏览器可访问 API 时，OHLCV K 线和盘口深度来自 Bitget 公共行情。",
+    boundaryDerivedText: "信号、委员会投票和交易闸门是确定性的演示逻辑。",
+    boundarySimText: "模拟执行、压力测试和备用 K 线属于模拟层。",
+    provenanceTape: "来源磁带",
+    tapeMarketTitle: "市场数据",
+    tapeMarketLive: "Bitget OHLCV + 盘口，状态：{state}。",
+    tapeMarketFallback: "本地备用 K 线，状态：{state}。",
+    tapeDerivedTitle: "风控逻辑",
+    tapeDerivedBody: "委员会投票、闸门分数、风险雷达和冲击实验室是确定性演示逻辑。",
+    tapeExecutionTitle: "执行层",
+    tapeExecutionBody: "不下真实订单。模拟交易使用止损、止盈和时间退出规则。",
+    decisionPassport: "决策护照",
+    auditCard: "审计卡",
+    issuePassport: "签发护照",
+    copySummary: "复制摘要",
+    copied: "已复制",
+    copyFallback: "摘要已生成在下方",
+    passportEmpty: "先运行分析，然后签发决策护照。",
+    passPair: "交易对",
+    passSource: "数据来源",
+    passGate: "闸门",
+    passRadar: "雷达均分",
+    passBoundary: "边界",
+    passPlan: "计划",
+    passTimestamp: "签发时间",
+    passBoundaryText: "真实市场数据、确定性风控逻辑、模拟执行。",
+    systemMonitor: "系统监控",
+    monitorCandles: "K线",
+    monitorBook: "盘口",
+    monitorRefresh: "刷新",
+    monitorMarket: "市场",
+    monitorAuto: "自动15秒",
+    monitorManual: "手动",
+    readiness: "准备度",
+    readinessLabel: "可提交 MVP",
+    fitTheme: "符合 Trading Agent 赛道",
+    fitDemo: "可运行 demo 与 README",
+    fitData: "使用 Bitget 公共行情数据",
+    fitMissing: "还需要公开仓库和 3-5 分钟视频",
+    demoRunway: "演示跑道",
+    runwayTitle: "提交流程",
+    runwayMarket: "市场扫描",
+    runwayPlan: "交易计划",
+    runwayGate: "风险闸门",
+    runwayPassport: "决策护照",
+    runwayExecution: "模拟交易",
+    runwayPending: "待处理",
+    runwayActive: "进行中",
+    runwayDone: "完成",
+    runwayBlocked: "阻止",
+    heroEyebrow: "交易前风控台",
+    heroTitle: "一个能在坏交易发生前投票否决的交易委员会。",
+    projectInfoOpen: "打开项目介绍",
+    projectInfoClose: "关闭项目介绍",
+    projectInfoEyebrow: "项目简介",
+    projectInfoTitle: "Signal Desk",
+    projectInfoIntro: "Signal Desk 是一个面向 Bitget AI x Crypto Hackathon 的交易前风控台 Demo。它像一个交易委员会，会在执行前先审查交易设置。",
+    projectInfoBoundary: "浏览器可访问公共接口时，风控台会使用真实 Bitget K 线和盘口数据。模拟执行、压力测试、备用 K 线和风控投票仍属于 Demo 层。",
+    projectInfoReal: "尽量真实",
+    projectInfoRealBody: "Bitget K 线、盘口深度，以及尽力拉取的公开新闻标题。",
+    projectInfoDemo: "Demo 边界",
+    projectInfoDemoBody: "不下真实订单，不托管资产，不构成投资建议。",
+    projectInfoUnique: "独特流程",
+    projectInfoUniqueBody: "信号委员会、交易闸门、市场状态地图、现实回放器和决策护照。",
+    projectInfoNote: "目标不是宣称 Agent 总能赚钱，而是展示交易 Agent 如何解释数据来源、拒绝弱交易，并留下可审计的决策轨迹。",
+    agent: "Agent",
+    confidence: "置信度",
+    sessionPnl: "本轮盈亏",
+    liveSimulation: "实时模拟",
+    marketFingerprint: "市场指纹",
+    candleMatrix: "K 线矩阵",
+    orderBookPulse: "盘口脉冲",
+    depthImbalance: "深度失衡",
+    bidDepth: "买盘深度",
+    askDepth: "卖盘深度",
+    spread: "价差",
+    imbalance: "失衡",
+    bookLive: "盘口实时",
+    bookUnavailable: "盘口不可用",
+    contextFeed: "上下文信息流",
+    headlineTape: "新闻标题带",
+    contextLive: "新闻实时",
+    contextFallback: "备用上下文",
+    contextLoading: "加载上下文",
+    contextScore: "上下文分",
+    contextEvents: "事件数",
+    contextSourceNote: "尽力拉取公开加密新闻标题。标题只作为只读上下文，不单独构成交易信号。",
+    fallbackHeadline1: "BTC 与 ETH 资金流仍是整体加密风险偏好的主要驱动。",
+    fallbackHeadline2: "山寨币 beta 对流动性变化和杠杆快速出清较敏感。",
+    fallbackHeadline3: "浏览器无法访问实时新闻时，风控台会把上下文标记为谨慎备用状态。",
+    regimeMap: "市场状态地图",
+    regimeTrend: "趋势",
+    regimeVol: "波动",
+    regimeLiquidity: "流动性",
+    regimeContext: "上下文",
+    regimeCalmUptrend: "平稳上行",
+    regimeHotMomentum: "高温动能",
+    regimeMeanRevert: "均值回归",
+    regimeRiskOff: "避险震荡",
+    regimeNoteCalmUptrend: "趋势建设性较强，同时波动仍受控。",
+    regimeNoteHotMomentum: "动能较强，但波动拥挤度正在抬升。",
+    regimeNoteMeanRevert: "市场处于中部区域，避免强行押方向。",
+    regimeNoteRiskOff: "波动与弱上下文提示应保持耐心。",
+    riskRadar: "风险雷达",
+    radarSpread: "价差",
+    radarDepth: "深度",
+    radarVolume: "成交量",
+    radarRange: "区间",
+    trend: "趋势",
+    volatility: "波动",
+    liquidity: "流动性",
+    newsPulse: "上下文层",
+    generatedPlan: "生成计划",
+    entry: "入场",
+    stop: "止损",
+    target1: "目标 1",
+    target2: "目标 2",
+    positionSize: "仓位大小",
+    riskReward: "盈亏比",
+    agentThesis: "Agent 观点",
+    paperOrders: "模拟订单",
+    simulationBlotter: "交易记录",
+    reset: "重置",
+    time: "时间",
+    side: "方向",
+    exit: "出场",
+    pnl: "盈亏",
+    noTrades: "暂无模拟交易。",
+    agentMemory: "Agent 记忆",
+    decisionLog: "决策日志",
+    ready: "就绪",
+    analyzing: "分析中",
+    watching: "观察中",
+    simulating: "模拟中",
+    waitingScan: "Agent 正在等待市场扫描。",
+    bitgetLive: "Bitget 实时",
+    simulated: "模拟数据",
+    loadingData: "加载数据中",
+    fallbackData: "备用数据",
+    staleData: "旧实时数据",
+    updated: "更新于 {time}",
+    awaitingAnalysis: "等待分析",
+    standBy: "待命",
+    waiting: "等待",
+    noTrade: "不交易",
+    longSetup: "做多计划",
+    shortSetup: "做空计划",
+    neutralRange: "中性震荡",
+    bullishMomentum: "多头动能",
+    bearishPressure: "空头压力",
+    elevated: "偏高",
+    normal: "正常",
+    deep: "深",
+    strong: "强",
+    moderate: "中等",
+    etfInflows: "ETF 资金流入稳定",
+    l2Fees: "L2 费用回落",
+    developerActivity: "开发者活跃度上升",
+    rangeFlows: "资金流处于区间震荡",
+    noPlanThesis: "选择交易对并运行分析，生成带有风险控制的交易计划。",
+    waitThesis: "{pair} 目前没有提供足够好的风险回报。上下文层标记为{news}，但价格仍在 {low} 到 {high} 的近期区间内。最佳动作：等待突破或重新站回关键位。",
+    tradeThesis: "{pair} 正呈现{direction}，流动性{liquidity}。上下文层标记为{news}。计划先定义止损与分批目标，在考虑真实执行前完成风险约束。",
+    upside: "上行动能延续",
+    downside: "下行动能延续",
+    planGeneratedTitle: "已生成{side}计划",
+    planGeneratedBody: "已扫描 {pair}，周期 {timeframe}。置信度 {confidence}%。模拟账户风险预算 {risk}%。",
+    tradeSkippedTitle: "跳过交易",
+    tradeSkippedBody: "Agent 拒绝强行开仓，因为预期回报没有通过风险过滤器。",
+    gateBlockedTitle: "交易闸门已阻止",
+    gateBlockedBody: "风控台否决了执行。请修正交易设置或降低风险后再模拟。",
+    tradeClosedTitle: "模拟交易已平仓",
+    tradeClosedBody: "{side} {pair} 在 {exit} 通过{exitReason}出场，结果为{result} {pnl}。",
+    takeProfit: "止盈",
+    stopLoss: "止损",
+    timeExit: "时间退出",
+    profit: "盈利",
+    loss: "亏损",
+    resetTitle: "会话已重置",
+    resetBody: "已清空模拟订单并重置演示盈亏。",
+    timeframeChangedTitle: "周期已切换",
+    timeframeChangedBody: "Agent 视角已切换到 {timeframe}。请重新分析以刷新计划。",
+    dataLoadedTitle: "已载入 Bitget 数据",
+    dataLoadedBody: "已从 Bitget 公共行情拉取 {pair} 的 {count} 根 K 线。",
+    dataFallbackTitle: "正在使用备用数据",
+    dataFallbackBody: "Bitget 实时 K 线暂不可用，演示已切换到本地模拟 K 线。",
+    dataStaleTitle: "保留上一批实时数据",
+    dataStaleBody: "刷新失败，风控台保留上一批 Bitget 快照并标记为旧数据。",
+    contextLoadedTitle: "上下文信息流已载入",
+    contextLoadedBody: "已为上下文层拉取 {count} 条公开加密新闻标题。",
+    contextFallbackTitle: "正在使用备用上下文",
+    contextFallbackBody: "实时新闻不可用，因此风控台已把上下文标记为备用状态。",
+    tradeGate: "交易闸门",
+    signalCouncil: "信号委员会",
+    roleVotes: "角色投票",
+    edgeDecomposer: "优势拆解器",
+    evidenceStack: "证据堆栈",
+    edgeEmpty: "运行分析后，把交易设置拆成可度量证据。",
+    edgeMomentum: "动能优势",
+    edgeLiquidity: "流动性优势",
+    edgeVolatility: "波动优势",
+    edgeContext: "上下文优势",
+    edgeStress: "压力优势",
+    edgeMomentumBody: "近期斜率相对所选周期基准的强弱。",
+    edgeLiquidityBody: "盘口价差、深度均衡和成交量参与度。",
+    edgeVolatilityBody: "区间热度和止损距离压力。",
+    edgeContextBody: "尽力拉取公开新闻标题；无法加载时使用明确标记的备用上下文。",
+    edgeStressBody: "情景测试与执行事故敏感度。",
+    realityHarness: "现实回放器",
+    rollingReplay: "滚动回放",
+    harnessEmpty: "运行分析后，在最近 K 线窗口上回放这套计划。",
+    harnessWinRate: "胜率",
+    harnessWorst: "最差路径",
+    harnessMedian: "中位盈亏",
+    harnessWindows: "窗口数",
+    harnessLiveNote: "回放使用已载入的最新 OHLCV 窗口，执行层仍是模拟。",
+    stressTape: "压力测试",
+    scenarioTests: "情景测试",
+    gateReasonEmpty: "运行分析后，风控台会判断这笔交易是否允许进入模拟执行。",
+    noDecision: "暂无决策",
+    allowTrade: "允许交易",
+    cautionTrade: "谨慎通过",
+    vetoTrade: "否决",
+    gateAllow: "风控台允许该计划，因为信号质量、盈亏比和压力测试基本一致。",
+    gateCaution: "风控台仅允许降低仓位的模拟交易，因为至少一个风险角色提出了保留意见。",
+    gateVeto: "风控台阻止这笔交易，因为该设置没有通过风险闸门。",
+    momentumReviewer: "动能",
+    riskReviewer: "风险",
+    liquidityReviewer: "流动性",
+    macroReviewer: "上下文",
+    approve: "通过",
+    caution: "谨慎",
+    veto: "否决",
+    voteMomentumOk: "趋势和近期斜率支持当前方向。",
+    voteMomentumBad: "动能没有确认当前方向。",
+    voteRiskOk: "盈亏比通过风控台最低要求。",
+    voteRiskBad: "潜在收益不足以覆盖止损距离。",
+    voteLiquidityOk: "流动性足以承载演示入场。",
+    voteLiquidityBad: "该设置下流动性偏薄。",
+    voteContextOk: "上下文层没有与计划冲突。",
+    voteContextBad: "上下文层支持度不足。",
+    shockDown: "反向冲击",
+    volatilityExpansion: "波动放大",
+    lateEntry: "追价入场",
+    pass: "通过",
+    watch: "观察",
+    fail: "失败",
+    stressShockBody: "测试立即反向波动时止损是否可控。",
+    stressVolBody: "检查波动扩大后是否突破风险预算。",
+    stressLateBody: "模拟更差入场价格下追单的结果。",
+    killSwitch: "熔断演练",
+    killTitle: "运行一次执行事故演练",
+    runDrill: "运行演练",
+    drillLatency: "延迟",
+    drillSlippage: "滑点",
+    drillExposure: "暴露",
+    drillAction: "动作",
+    drillPass: "正常",
+    drillWatch: "降仓",
+    drillFail: "冻结",
+    drillLoggedTitle: "熔断演练完成",
+    drillLoggedBody: "执行安全检查返回 {action}：延迟 {latency}ms，滑点 {slippage}bps，暴露 {exposure}%。",
+    shockMove: "价格冲击",
+    shockDepth: "盘口抽走",
+    shockLatency: "延迟尖峰",
+    shockVerdict: "裁决",
+    shockNotes: "风控备注",
+    shockNormal: "正常",
+    shockReduce: "降仓",
+    shockFreeze: "冻结",
+    shockNormalNote: "冲击仍在演示风险边界内，可以继续模拟执行。",
+    shockReduceNote: "冲击偏高。风控台会降低仓位，并重新检查盘口深度。",
+    shockFreezeNote: "冲击突破限制。风控台冻结执行，等待新的市场读取。",
+  },
+};
+
+const state = {
+  candles: [],
+  orderBook: null,
+  series: [],
+  plan: null,
+  orders: [],
+  sessionPnl: 0,
+  lang: "en",
+  status: "ready",
+  dataSource: "simulated",
+  refreshTimer: null,
+  lastUpdated: null,
+  activeRequestId: 0,
+  marketKey: "",
+  latencies: { candles: null, book: null },
+  refreshMode: "monitorAuto",
+  context: { source: "loading", headlines: [], score: 50, tone: "watch" },
+  council: [],
+  stress: [],
+  gate: null,
+  drill: null,
+  passportIssued: false,
+};
+
+const $ = (id) => document.getElementById(id);
+const chart = $("priceChart");
+const ctx = chart.getContext("2d");
+
+function money(value) {
+  const maximumFractionDigits = Math.abs(value) > 1000 ? 2 : 4;
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits,
+  }).format(value);
+}
+
+function t(key, replacements = {}) {
+  const template = translations[state.lang][key] || translations.en[key] || key;
+  return Object.entries(replacements).reduce(
+    (text, [name, value]) => text.replaceAll(`{${name}}`, value),
+    template
+  );
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function safeExternalUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" || url.protocol === "http:" ? url.href : "";
+  } catch (error) {
+    return "";
+  }
+}
+
+function setTone(element, tones, activeTone) {
+  if (!element) return;
+  element.classList.remove(...tones);
+  if (activeTone) element.classList.add(activeTone);
+}
+
+function sideLabel(side) {
+  if (side === "LONG") return state.lang === "zh" ? "做多" : "LONG";
+  if (side === "SHORT") return state.lang === "zh" ? "做空" : "SHORT";
+  return state.lang === "zh" ? "观望" : "WAIT";
+}
+
+function timeframeLabel() {
+  const value = $("timeframeSelect").value;
+  if (value === "15m") return t("tf15");
+  if (value === "4h") return t("tf4h");
+  if (value === "1day") return t("tf1d");
+  return t("tf1h");
+}
+
+function newsText(profile) {
+  return state.context.headlines[0]?.title || t(profile.news);
+}
+
+function liquidityText(profile) {
+  return t(profile.liquidity);
+}
+
+function nowTime() {
+  return new Intl.DateTimeFormat("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).format(new Date());
+}
+
+function shortTime() {
+  return new Intl.DateTimeFormat(state.lang === "zh" ? "zh-CN" : "en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).format(new Date());
+}
+
+function seededNoise(seed) {
+  const x = Math.sin(seed * 999) * 10000;
+  return x - Math.floor(x);
+}
+
+function buildCandles(pairKey) {
+  const profile = pairProfiles[pairKey];
+  const candles = [];
+  let price = profile.base;
+  for (let i = 0; i < 72; i += 1) {
+    const open = price;
+    const wave = Math.sin(i / 7) * profile.bias * profile.volatility;
+    const noise = (seededNoise(i + profile.base) - 0.5) * profile.volatility;
+    price *= 1 + wave + noise;
+    const close = price;
+    const range = Math.abs(close - open) + open * profile.volatility * (0.35 + seededNoise(i * 3 + profile.base) * 0.9);
+    const high = Math.max(open, close) + range * 0.45;
+    const low = Math.min(open, close) - range * 0.45;
+    const volume = 1000 + seededNoise(i * 11 + profile.base) * 5000;
+    candles.push({ time: Date.now() - (72 - i) * 60000, open, high, low, close, volume });
+  }
+  return candles;
+}
+
+function bitgetGranularity() {
+  const value = $("timeframeSelect").value;
+  if (value === "15m") return "15min";
+  if (value === "4h") return "4h";
+  if (value === "1day") return "1day";
+  return "1h";
+}
+
+async function fetchJsonWithTimeout(url, timeoutMs = 8000) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, { headers: { Accept: "application/json" }, signal: controller.signal });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
+async function fetchTextWithTimeout(url, timeoutMs = 8000) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, { headers: { Accept: "application/rss+xml, text/xml, text/plain" }, signal: controller.signal });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.text();
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
+async function timed(label, task) {
+  const start = performance.now();
+  try {
+    return await task();
+  } finally {
+    state.latencies[label] = Math.round(performance.now() - start);
+  }
+}
+
+async function fetchBitgetCandles(pairKey) {
+  const symbol = pairKey;
+  const granularity = bitgetGranularity();
+  const url = `https://api.bitget.com/api/v2/spot/market/candles?symbol=${symbol}&granularity=${granularity}&limit=72`;
+  const payload = await fetchJsonWithTimeout(url);
+  if (payload.code !== "00000" || !Array.isArray(payload.data)) {
+    throw new Error(payload.msg || "Unexpected Bitget payload");
+  }
+  const candles = payload.data
+    .map((candle) => ({
+      time: Number(candle[0]),
+      open: Number(candle[1]),
+      high: Number(candle[2]),
+      low: Number(candle[3]),
+      close: Number(candle[4]),
+      volume: Number(candle[5]) || 0,
+    }))
+    .filter((candle) => [candle.open, candle.high, candle.low, candle.close].every((price) => Number.isFinite(price) && price > 0))
+    .reverse();
+  if (candles.length < 12) throw new Error("Not enough candle data");
+  return candles;
+}
+
+async function fetchBitgetOrderBook(pairKey) {
+  const url = `https://api.bitget.com/api/v2/spot/market/orderbook?symbol=${pairKey}&type=step0&limit=50`;
+  const payload = await fetchJsonWithTimeout(url);
+  if (payload.code !== "00000" || !payload.data) {
+    throw new Error(payload.msg || "Unexpected Bitget orderbook payload");
+  }
+  const bids = (payload.data.bids || [])
+    .map((level) => ({ price: Number(level[0]), size: Number(level[1]) }))
+    .filter((level) => Number.isFinite(level.price) && Number.isFinite(level.size));
+  const asks = (payload.data.asks || [])
+    .map((level) => ({ price: Number(level[0]), size: Number(level[1]) }))
+    .filter((level) => Number.isFinite(level.price) && Number.isFinite(level.size));
+  if (!bids.length || !asks.length) throw new Error("Not enough orderbook data");
+  return { bids, asks, ts: Number(payload.data.ts) || Date.now() };
+}
+
+async function fetchCryptoHeadlines() {
+  const url = "https://min-api.cryptocompare.com/data/v2/news/?lang=EN&sortOrder=latest";
+  const payload = await fetchJsonWithTimeout(url, 7000);
+  const items = Array.isArray(payload.Data) ? payload.Data : [];
+  const headlines = items
+    .slice(0, 8)
+    .map((item) => ({
+      title: String(item.title || "").trim(),
+      source: String(item.source_info?.name || item.source || "News").trim(),
+      url: String(item.url || "").trim(),
+    }))
+    .filter((item) => item.title);
+  if (!headlines.length) throw new Error("No headline data");
+  return headlines;
+}
+
+function fallbackHeadlines() {
+  return [
+    { title: t("fallbackHeadline1"), source: "Signal Desk", url: "" },
+    { title: t("fallbackHeadline2"), source: "Signal Desk", url: "" },
+    { title: t("fallbackHeadline3"), source: "Signal Desk", url: "" },
+  ];
+}
+
+function scoreHeadlines(headlines, source) {
+  const text = headlines.map((item) => item.title.toLowerCase()).join(" ");
+  const positive = ["etf", "inflow", "approval", "rally", "surge", "record", "adoption", "upgrade", "accumulate"];
+  const negative = ["hack", "lawsuit", "outflow", "ban", "exploit", "liquidation", "crash", "fraud", "probe"];
+  const pos = positive.reduce((sum, word) => sum + (text.includes(word) ? 1 : 0), 0);
+  const neg = negative.reduce((sum, word) => sum + (text.includes(word) ? 1 : 0), 0);
+  const raw = source === "live" ? 54 + pos * 8 - neg * 10 : 46;
+  const score = Math.round(clamp(raw, 18, 88));
+  const tone = score >= 66 ? "good" : score >= 42 ? "watch" : "bad";
+  return { score, tone };
+}
+
+async function loadContextFeed({ log = false } = {}) {
+  state.context = { ...state.context, source: "loading" };
+  renderContextFeed();
+  try {
+    const headlines = await fetchCryptoHeadlines();
+    const scored = scoreHeadlines(headlines, "live");
+    state.context = { source: "live", headlines, ...scored };
+    if (log) logDecision(t("contextLoadedTitle"), t("contextLoadedBody", { count: headlines.length }));
+  } catch (error) {
+    const headlines = fallbackHeadlines();
+    const scored = scoreHeadlines(headlines, "fallback");
+    state.context = { source: "fallback", headlines, ...scored };
+    if (log) logDecision(t("contextFallbackTitle"), t("contextFallbackBody"));
+  }
+  renderContextFeed();
+  renderRegimeMap();
+  if (state.plan) {
+    state.plan.thesis = buildThesis(state.plan);
+    updatePlanUI();
+    updateDeskUI();
+  }
+  renderProvenanceTape();
+}
+
+function updateDataSourceLabel() {
+  const key =
+    state.dataSource === "bitget"
+      ? "bitgetLive"
+      : state.dataSource === "loading"
+        ? "loadingData"
+        : state.dataSource === "stale"
+          ? "staleData"
+          : state.dataSource === "fallback"
+            ? "fallbackData"
+            : "simulated";
+  const source = $("dataSource");
+  source.querySelector("span").textContent = t(key);
+  source.className = `source-pill source-${state.dataSource}`;
+  $("lastUpdated").textContent = state.lastUpdated ? t("updated", { time: state.lastUpdated }) : "--";
+  renderDemoRunway();
+}
+
+function renderBoundary() {
+  const liveLabel = state.dataSource === "stale" ? "staleData" : state.dataSource === "fallback" ? "fallbackData" : "boundaryLive";
+  $("boundaryList").innerHTML = [
+    [liveLabel, "boundaryLiveText"],
+    ["boundaryDerived", "boundaryDerivedText"],
+    ["boundarySim", "boundarySimText"],
+  ]
+    .map(([label, body]) => `<div class="boundary-item"><strong>${t(label)}</strong><p>${t(body)}</p></div>`)
+    .join("");
+}
+
+function renderProvenanceTape() {
+  const marketIsLive = state.dataSource === "bitget" || state.dataSource === "stale";
+  const marketBody = marketIsLive
+    ? t("tapeMarketLive", { state: t(state.dataSource === "stale" ? "staleData" : "bitgetLive") })
+    : t("tapeMarketFallback", { state: t(state.dataSource === "fallback" ? "fallbackData" : "simulated") });
+  const steps = [
+    ["tapeMarketTitle", marketBody],
+    ["contextFeed", `${t(state.context.source === "live" ? "contextLive" : state.context.source === "loading" ? "contextLoading" : "contextFallback")} (${Math.round(state.context.score)}/100).`],
+    ["tapeDerivedTitle", t("tapeDerivedBody")],
+    ["tapeExecutionTitle", t("tapeExecutionBody")],
+  ];
+  $("provenanceTape").innerHTML = steps
+    .map(
+      ([title, body], index) => `
+        <div class="tape-step">
+          <div class="tape-index">${index + 1}</div>
+          <div><strong>${t(title)}</strong><p>${body}</p></div>
+        </div>
+      `
+    )
+    .join("");
+}
+
+function renderSystemMonitor() {
+  const items = [
+    ["monitorCandles", state.latencies.candles == null ? "--" : `${state.latencies.candles}ms`],
+    ["monitorBook", state.latencies.book == null ? "--" : `${state.latencies.book}ms`],
+    ["monitorRefresh", t(state.refreshMode)],
+    ["monitorMarket", currentMarketKey()],
+  ];
+  $("systemMonitor").innerHTML = items
+    .map(([label, value]) => `<div class="monitor-item"><span>${t(label)}</span><strong>${value}</strong></div>`)
+    .join("");
+}
+
+function runwayStatusClass(step) {
+  if (step.blocked) return "blocked";
+  if (step.done) return "done";
+  if (step.active) return "active";
+  return "pending";
+}
+
+function runwayStatusLabel(status) {
+  if (status === "blocked") return "runwayBlocked";
+  if (status === "done") return "runwayDone";
+  if (status === "active") return "runwayActive";
+  return "runwayPending";
+}
+
+function renderDemoRunway() {
+  if (!$("demoRunway")) return;
+  const marketReady = state.dataSource !== "loading" && state.series.length > 0;
+  const gateDone = Boolean(state.gate);
+  const gateBlocked = state.gate?.decision === "vetoTrade" || state.plan?.side === "WAIT";
+  const canExecute = gateDone && !gateBlocked;
+  const steps = [
+    { label: "runwayMarket", done: marketReady, active: !marketReady },
+    { label: "runwayPlan", done: Boolean(state.plan), active: marketReady && !state.plan },
+    { label: "runwayGate", done: gateDone, active: Boolean(state.plan) && !gateDone },
+    { label: "runwayPassport", done: state.passportIssued, active: gateDone && !state.passportIssued },
+    { label: "runwayExecution", done: state.orders.length > 0, active: canExecute && state.passportIssued && !state.orders.length, blocked: gateBlocked },
+  ];
+  const completed = steps.filter((step) => step.done).length;
+  $("runwayBadge").textContent = `${completed}/${steps.length}`;
+  $("demoRunway").innerHTML = steps
+    .map((step, index) => {
+      const status = runwayStatusClass(step);
+      return `
+        <div class="runway-step ${status}">
+          <span>${index + 1}</span>
+          <div>
+            <strong>${t(step.label)}</strong>
+            <em>${t(runwayStatusLabel(status))}</em>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function renderContextFeed() {
+  if (!$("contextSource")) return;
+  const key = state.context.source === "live" ? "contextLive" : state.context.source === "loading" ? "contextLoading" : "contextFallback";
+  $("contextSource").textContent = t(key);
+  $("contextMeter").className = `context-meter ${state.context.tone || "watch"}`;
+  $("contextMeter").innerHTML = `
+    <div>
+      <span>${t("contextScore")}</span>
+      <strong>${Math.round(state.context.score)}/100</strong>
+    </div>
+    <div>
+      <span>${t("contextEvents")}</span>
+      <strong>${state.context.headlines.length}</strong>
+    </div>
+    <p>${t("contextSourceNote")}</p>
+  `;
+  $("contextFeedList").innerHTML = (state.context.headlines.length ? state.context.headlines : fallbackHeadlines())
+    .slice(0, 5)
+    .map((item) => {
+      const url = safeExternalUrl(item.url);
+      const title = escapeHtml(item.title);
+      const source = escapeHtml(item.source);
+      const headline = url ? `<a href="${url}" target="_blank" rel="noreferrer">${title}</a>` : `<span>${title}</span>`;
+      return `<div class="headline-item">${headline}<strong>${source}</strong></div>`;
+    })
+    .join("");
+}
+
+function setCandles(candles) {
+  state.candles = candles;
+  state.series = candles.map((candle) => candle.close);
+}
+
+function candleStats() {
+  const candles = state.candles.length ? state.candles : buildCandles($("pairSelect").value);
+  const recent = candles.slice(-24);
+  const avgRange =
+    recent.reduce((sum, candle) => sum + (candle.high - candle.low) / candle.close, 0) / Math.max(1, recent.length);
+  const avgVolume = recent.reduce((sum, candle) => sum + candle.volume, 0) / Math.max(1, recent.length);
+  const lastVolume = recent.at(-1)?.volume || 0;
+  return { avgRange, avgVolume, lastVolume };
+}
+
+function bookStats() {
+  if (!state.orderBook) return null;
+  const bidDepth = state.orderBook.bids.reduce((sum, level) => sum + level.price * level.size, 0);
+  const askDepth = state.orderBook.asks.reduce((sum, level) => sum + level.price * level.size, 0);
+  const bestBid = state.orderBook.bids[0]?.price || 0;
+  const bestAsk = state.orderBook.asks[0]?.price || 0;
+  const mid = bestBid && bestAsk ? (bestBid + bestAsk) / 2 : 0;
+  const spreadBps = mid ? ((bestAsk - bestBid) / mid) * 10000 : 0;
+  const imbalance = bidDepth + askDepth ? ((bidDepth - askDepth) / (bidDepth + askDepth)) * 100 : 0;
+  return { bidDepth, askDepth, spreadBps, imbalance };
+}
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function radarScores() {
+  const candles = candleStats();
+  const book = bookStats();
+  const spreadScore = book ? clamp(100 - book.spreadBps * 7, 0, 100) : 45;
+  const depthScore = book ? clamp(100 - Math.abs(book.imbalance) * 1.35, 0, 100) : 45;
+  const volumeScore = clamp((candles.lastVolume / Math.max(candles.avgVolume, 1)) * 72, 0, 100);
+  const rangeScore = clamp(100 - candles.avgRange * 2200, 0, 100);
+  return [
+    { label: "radarSpread", score: spreadScore },
+    { label: "radarDepth", score: depthScore },
+    { label: "radarVolume", score: volumeScore },
+    { label: "radarRange", score: rangeScore },
+  ];
+}
+
+function average(values) {
+  if (!values.length) return 0;
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+
+function edgeScores() {
+  const data = state.series;
+  if (!state.plan || data.length < 12) return [];
+  const first = data[0];
+  const last = data.at(-1);
+  const change = first ? (last - first) / first : 0;
+  const planDirection = state.plan.side === "SHORT" ? -1 : state.plan.side === "LONG" ? 1 : 0;
+  const directedMove = planDirection ? change * planDirection : -Math.abs(change);
+  const book = bookStats();
+  const stats = candleStats();
+  const radar = radarScores();
+  const stressPass = state.stress.filter((item) => item.status === "pass").length;
+  const stressWatch = state.stress.filter((item) => item.status === "watch").length;
+  const momentumScore = clamp(50 + directedMove * 1800, 0, 100);
+  const liquidityScore = book
+    ? clamp(84 - book.spreadBps * 4 - Math.abs(book.imbalance) * 0.65, 0, 100)
+    : clamp((stats.lastVolume / Math.max(stats.avgVolume, 1)) * 64, 0, 100);
+  const volatilityScore = clamp(100 - stats.avgRange * 1800, 0, 100);
+  const contextScore = state.context.source === "live" ? state.context.score : Math.min(state.context.score, 52);
+  const stressScore = clamp(36 + stressPass * 20 + stressWatch * 8 - state.stress.filter((item) => item.status === "fail").length * 30, 0, 100);
+  return [
+    { label: "edgeMomentum", body: "edgeMomentumBody", score: momentumScore },
+    { label: "edgeLiquidity", body: "edgeLiquidityBody", score: liquidityScore },
+    { label: "edgeVolatility", body: "edgeVolatilityBody", score: volatilityScore },
+    { label: "edgeContext", body: "edgeContextBody", score: contextScore },
+    { label: "edgeStress", body: "edgeStressBody", score: stressScore || average(radar.map((axis) => axis.score)) },
+  ];
+}
+
+function regimeState() {
+  const data = state.series.length ? state.series : buildCandles($("pairSelect").value).map((candle) => candle.close);
+  const first = data[0] || 1;
+  const last = data.at(-1) || first;
+  const trendPct = ((last - first) / first) * 100;
+  const stats = candleStats();
+  const book = bookStats();
+  const trendScore = clamp(50 + trendPct * 8, 0, 100);
+  const volScore = clamp(stats.avgRange * 2400, 0, 100);
+  const liquidityScore = book ? clamp(100 - book.spreadBps * 5 - Math.abs(book.imbalance) * 0.5, 0, 100) : 48;
+  const contextScore = state.context.source === "live" ? state.context.score : Math.min(state.context.score, 52);
+  const x = Math.round(trendScore);
+  const y = Math.round(100 - volScore);
+  const regime =
+    trendScore >= 58 && volScore < 46
+      ? ["regimeCalmUptrend", "regimeNoteCalmUptrend"]
+      : trendScore >= 58 && volScore >= 46
+        ? ["regimeHotMomentum", "regimeNoteHotMomentum"]
+        : trendScore < 42 && (volScore >= 46 || contextScore < 42)
+          ? ["regimeRiskOff", "regimeNoteRiskOff"]
+          : ["regimeMeanRevert", "regimeNoteMeanRevert"];
+  return {
+    x,
+    y,
+    trend: Math.round(trendPct * 100) / 100,
+    volatility: Math.round(volScore),
+    liquidity: Math.round(liquidityScore),
+    context: Math.round(contextScore),
+    title: regime[0],
+    note: regime[1],
+  };
+}
+
+function renderRegimeMap() {
+  if (!$("regimeMapPlot")) return;
+  const regime = regimeState();
+  $("regimeTitle").textContent = t(regime.title);
+  $("regimeBadge").textContent = `${regime.x}/${regime.y}`;
+  $("regimeMapPlot").style.setProperty("--x", `${regime.x}%`);
+  $("regimeMapPlot").style.setProperty("--y", `${regime.y}%`);
+  $("regimeMapPlot").innerHTML = `
+    <div class="regime-axis x">${t("regimeTrend")}</div>
+    <div class="regime-axis y">${t("regimeVol")}</div>
+    <span class="regime-dot"></span>
+    <div class="regime-quadrant q1">${t("regimeCalmUptrend")}</div>
+    <div class="regime-quadrant q2">${t("regimeHotMomentum")}</div>
+    <div class="regime-quadrant q3">${t("regimeMeanRevert")}</div>
+    <div class="regime-quadrant q4">${t("regimeRiskOff")}</div>
+  `;
+  $("regimeReadout").innerHTML = [
+    ["regimeTrend", `${regime.trend >= 0 ? "+" : ""}${regime.trend.toFixed(2)}%`],
+    ["regimeVol", `${regime.volatility}/100`],
+    ["regimeLiquidity", `${regime.liquidity}/100`],
+    ["regimeContext", `${regime.context}/100`],
+  ]
+    .map(([label, value]) => `<div><span>${t(label)}</span><strong>${value}</strong></div>`)
+    .join("") + `<p>${t(regime.note)}</p>`;
+}
+
+function renderEdgeDecomposer() {
+  if (!$("edgeList")) return;
+  const edges = edgeScores();
+  if (!edges.length) {
+    $("edgeBadge").textContent = "--";
+    $("edgeList").innerHTML = `<div class="edge-card"><p>${t("edgeEmpty")}</p></div>`;
+    return;
+  }
+  const composite = Math.round(average(edges.map((edge) => edge.score)));
+  $("edgeBadge").textContent = `${composite}/100`;
+  $("edgeList").innerHTML = edges
+    .map((edge) => {
+      const tone = edge.score >= 70 ? "good" : edge.score >= 45 ? "watch" : "bad";
+      return `
+        <div class="edge-card ${tone}">
+          <div class="edge-top">
+            <strong>${t(edge.label)}</strong>
+            <span>${Math.round(edge.score)}/100</span>
+          </div>
+          <div class="edge-track"><i style="--edge:${Math.round(edge.score)}%"></i></div>
+          <p>${t(edge.body)}</p>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function replayPlan(plan) {
+  if (!plan || plan.side === "WAIT" || state.candles.length < 30) return null;
+  const windows = [];
+  const riskUnit = Math.abs(plan.entry - plan.stop) || 1;
+  for (let start = Math.max(0, state.candles.length - 54); start <= state.candles.length - 10; start += 6) {
+    const slice = state.candles.slice(start, start + 10);
+    const entry = slice[0].close;
+    const stop = plan.side === "SHORT" ? entry + riskUnit : entry - riskUnit;
+    const target = plan.side === "SHORT" ? entry - riskUnit * plan.rr : entry + riskUnit * plan.rr;
+    let exit = slice.at(-1).close;
+    let reason = "timeExit";
+    for (const candle of slice.slice(1)) {
+      if (plan.side === "LONG" && candle.low <= stop) {
+        exit = stop;
+        reason = "stopLoss";
+        break;
+      }
+      if (plan.side === "LONG" && candle.high >= target) {
+        exit = target;
+        reason = "takeProfit";
+        break;
+      }
+      if (plan.side === "SHORT" && candle.high >= stop) {
+        exit = stop;
+        reason = "stopLoss";
+        break;
+      }
+      if (plan.side === "SHORT" && candle.low <= target) {
+        exit = target;
+        reason = "takeProfit";
+        break;
+      }
+    }
+    const r = ((plan.side === "LONG" ? exit - entry : entry - exit) / riskUnit);
+    windows.push({ r, reason });
+  }
+  if (!windows.length) return null;
+  const sorted = [...windows].sort((a, b) => a.r - b.r);
+  const wins = windows.filter((item) => item.r > 0).length;
+  return {
+    windows,
+    winRate: (wins / windows.length) * 100,
+    worst: sorted[0].r,
+    median: sorted[Math.floor(sorted.length / 2)].r,
+  };
+}
+
+function renderRealityHarness() {
+  if (!$("harnessStats")) return;
+  const replay = replayPlan(state.plan);
+  if (!replay) {
+    $("harnessBadge").textContent = "--";
+    $("harnessStats").innerHTML = `<div class="harness-note">${t("harnessEmpty")}</div>`;
+    $("harnessPaths").innerHTML = "";
+    return;
+  }
+  $("harnessBadge").textContent = `${Math.round(replay.winRate)}%`;
+  $("harnessStats").innerHTML = [
+    ["harnessWinRate", `${Math.round(replay.winRate)}%`],
+    ["harnessWorst", `${replay.worst.toFixed(2)}R`],
+    ["harnessMedian", `${replay.median.toFixed(2)}R`],
+    ["harnessWindows", replay.windows.length],
+  ]
+    .map(([label, value]) => `<div><span>${t(label)}</span><strong>${value}</strong></div>`)
+    .join("");
+  $("harnessPaths").innerHTML = `
+    <div class="path-strip">
+      ${replay.windows
+        .map((item) => {
+          const tone = item.r > 0 ? "win" : item.r < -0.8 ? "loss" : "flat";
+          const height = `${Math.max(18, Math.min(100, Math.abs(item.r) * 48))}%`;
+          return `<span class="${tone}" title="${item.r.toFixed(2)}R ${t(item.reason)}" style="--height:${height}"></span>`;
+        })
+        .join("")}
+    </div>
+    <p>${t("harnessLiveNote")}</p>
+  `;
+}
+
+function renderFingerprint() {
+  const candles = (state.candles.length ? state.candles : buildCandles($("pairSelect").value)).slice(-48);
+  const maxVolume = Math.max(...candles.map((candle) => candle.volume), 1);
+  const ranges = candles.map((candle) => (candle.high - candle.low) / candle.close);
+  const hotRange = ranges.reduce((sum, value) => sum + value, 0) / Math.max(1, ranges.length) * 1.4;
+  $("fingerprintMatrix").innerHTML = candles
+    .map((candle) => {
+      const move = (candle.close - candle.open) / candle.open;
+      const range = (candle.high - candle.low) / candle.close;
+      const direction = Math.abs(move) < 0.0008 ? "flat" : move > 0 ? "up" : "down";
+      const hot = range > hotRange ? " hot" : "";
+      const volume = `${Math.max(8, Math.round((candle.volume / maxVolume) * 100))}%`;
+      const label = `${money(candle.open)} -> ${money(candle.close)}`;
+      return `<div class="finger-cell ${direction}${hot}" title="${label}" style="--volume:${volume}"></div>`;
+    })
+    .join("");
+}
+
+function renderOrderBook() {
+  if (!$("bookSource") || !$("riskRadar")) return;
+  const stats = bookStats();
+  const bar = document.querySelector(".book-bar");
+  if (!stats) {
+    $("bookSource").textContent = t("bookUnavailable");
+    $("bidDepth").textContent = "--";
+    $("askDepth").textContent = "--";
+    $("spreadValue").textContent = "--";
+    $("imbalanceValue").textContent = "--";
+    bar.style.setProperty("--bid", "1fr");
+    bar.style.setProperty("--ask", "1fr");
+    renderRiskRadar();
+    return;
+  }
+  const total = Math.max(1, stats.bidDepth + stats.askDepth);
+  $("bookSource").textContent = t("bookLive");
+  $("bidDepth").textContent = money(stats.bidDepth);
+  $("askDepth").textContent = money(stats.askDepth);
+  $("spreadValue").textContent = `${stats.spreadBps.toFixed(2)} bps`;
+  $("imbalanceValue").textContent = `${stats.imbalance >= 0 ? "+" : ""}${stats.imbalance.toFixed(1)}%`;
+  bar.style.setProperty("--bid", `${Math.max(8, (stats.bidDepth / total) * 100)}fr`);
+  bar.style.setProperty("--ask", `${Math.max(8, (stats.askDepth / total) * 100)}fr`);
+  renderRiskRadar();
+}
+
+function renderRiskRadar() {
+  $("riskRadar").innerHTML = radarScores()
+    .map((axis) => {
+      const tone = axis.score >= 70 ? "good" : axis.score >= 42 ? "watch" : "bad";
+      return `
+        <div class="radar-axis ${tone}">
+          <span>${t(axis.label)}</span>
+          <strong>${Math.round(axis.score)}/100</strong>
+          <div class="radar-track"><i style="--score:${Math.round(axis.score)}%"></i></div>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function renderPassport() {
+  if (!state.plan || !state.gate) {
+    $("passportCard").innerHTML = `<div class="passport-row"><span>${t("decisionPassport")}</span><strong>${t("passportEmpty")}</strong></div>`;
+    $("passportSummary").value = t("passportEmpty");
+    return;
+  }
+  const radarAvg = Math.round(radarScores().reduce((sum, axis) => sum + axis.score, 0) / 4);
+  const rows = [
+    ["passPair", pairProfiles[state.plan.pairKey].label],
+    ["passSource", t(state.dataSource === "bitget" ? "bitgetLive" : state.dataSource === "stale" ? "staleData" : state.dataSource === "fallback" ? "fallbackData" : "simulated")],
+    ["passGate", `${t(state.gate.decision)} (${state.gate.score}/100)`],
+    ["passRadar", `${radarAvg}/100`],
+    ["passPlan", state.plan.side === "WAIT" ? t("noTrade") : `${sideLabel(state.plan.side)} ${money(state.plan.entry)} -> ${money(state.plan.target1)}`],
+    ["passBoundary", t("passBoundaryText")],
+    ["passTimestamp", shortTime()],
+  ];
+  $("passportCard").innerHTML = rows
+    .map(([label, value]) => `<div class="passport-row"><span>${t(label)}</span><strong>${value}</strong></div>`)
+    .join("");
+  $("passportSummary").value = passportSummary(rows);
+}
+
+function passportSummary(rows) {
+  const lines = rows.map(([label, value]) => `${t(label)}: ${value}`);
+  return [`Signal Desk ${t("decisionPassport")}`, ...lines].join("\n");
+}
+
+async function copyPassportSummary() {
+  renderPassport();
+  const text = $("passportSummary").value;
+  try {
+    await navigator.clipboard.writeText(text);
+    $("copyPassportBtn").textContent = t("copied");
+  } catch (error) {
+    $("copyPassportBtn").textContent = t("copyFallback");
+    $("passportSummary").focus();
+    $("passportSummary").select();
+  }
+  window.setTimeout(() => {
+    $("copyPassportBtn").textContent = t("copySummary");
+  }, 1600);
+}
+
+function flashPrice() {
+  const price = $("lastPrice");
+  price.classList.remove("flash");
+  window.requestAnimationFrame(() => price.classList.add("flash"));
+}
+
+function resizeCanvas() {
+  const dpr = window.devicePixelRatio || 1;
+  const rect = chart.getBoundingClientRect();
+  chart.width = Math.round(rect.width * dpr);
+  chart.height = Math.round(rect.height * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function drawChart() {
+  resizeCanvas();
+  const width = chart.clientWidth;
+  const height = chart.clientHeight;
+  const pad = { top: 16, right: 18, bottom: 28, left: 18 };
+  const data = state.series;
+  ctx.clearRect(0, 0, width, height);
+
+  ctx.fillStyle = "#171b21";
+  ctx.fillRect(0, 0, width, height);
+
+  if (!data.length) return;
+  const min = Math.min(...data);
+  const max = Math.max(...data);
+  const range = max - min || 1;
+  const plotW = width - pad.left - pad.right;
+  const volumeH = Math.min(64, height * 0.22);
+  const plotH = height - pad.top - pad.bottom - volumeH;
+
+  ctx.strokeStyle = "#29313b";
+  ctx.lineWidth = 1;
+  for (let i = 0; i < 5; i += 1) {
+    const y = pad.top + (plotH / 4) * i;
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y);
+    ctx.lineTo(width - pad.right, y);
+    ctx.stroke();
+  }
+
+  const point = (price, i) => ({
+    x: pad.left + (plotW * i) / (data.length - 1),
+    y: pad.top + plotH - ((price - min) / range) * plotH,
+  });
+
+  const candles = state.candles.slice(-data.length);
+  const maxVolume = Math.max(...candles.map((candle) => candle.volume), 1);
+  const barW = Math.max(2, plotW / data.length - 3);
+  candles.forEach((candle, i) => {
+    const p = point(candle.close, i);
+    const vol = (candle.volume / maxVolume) * (volumeH - 10);
+    ctx.fillStyle = candle.close >= candle.open ? "rgba(46, 209, 124, 0.35)" : "rgba(255, 95, 102, 0.32)";
+    ctx.fillRect(p.x - barW / 2, height - pad.bottom - vol, barW, vol);
+  });
+
+  ctx.beginPath();
+  data.forEach((price, i) => {
+    const p = point(price, i);
+    if (i === 0) ctx.moveTo(p.x, p.y);
+    else ctx.lineTo(p.x, p.y);
+  });
+  ctx.strokeStyle = "#4ed6c7";
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  if (state.plan) {
+    [
+      { value: state.plan.entry, color: "#65a5ff", label: t("entry") },
+      { value: state.plan.stop, color: "#ff5f66", label: t("stop") },
+      { value: state.plan.target1, color: "#2ed17c", label: t("target1") },
+    ].forEach((line) => {
+      const y = pad.top + plotH - ((line.value - min) / range) * plotH;
+      if (y < pad.top || y > height - pad.bottom) return;
+      ctx.setLineDash([6, 6]);
+      ctx.strokeStyle = line.color;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, y);
+      ctx.lineTo(width - pad.right, y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = line.color;
+      ctx.font = "700 11px Inter, system-ui, sans-serif";
+      ctx.fillText(line.label, pad.left + 6, y - 6);
+    });
+  }
+}
+
+function setStatus(statusKey) {
+  state.status = statusKey;
+  $("agentStatus").textContent = t(statusKey);
+}
+
+function logDecision(title, body) {
+  const item = document.createElement("li");
+  item.innerHTML = `<span>${title}</span><p>${body}</p>`;
+  $("decisionLog").prepend(item);
+}
+
+function buildThesis(plan) {
+  const profile = pairProfiles[plan.pairKey];
+  const data = state.series;
+  const recent = data.slice(-16);
+  const recentHigh = Math.max(...recent);
+  const recentLow = Math.min(...recent);
+  const context = newsText(profile);
+  if (plan.side === "WAIT") {
+    return t("waitThesis", { pair: profile.label, news: context, low: money(recentLow), high: money(recentHigh) });
+  }
+  return t("tradeThesis", {
+    pair: profile.label,
+    direction: t(plan.side === "LONG" ? "upside" : "downside"),
+    liquidity: liquidityText(profile).toLowerCase(),
+    news: context.toLowerCase(),
+  });
+}
+
+function generatePlan() {
+  const pairKey = $("pairSelect").value;
+  const profile = pairProfiles[pairKey];
+  const risk = Number($("riskSlider").value);
+  const mode = $("modeSelect").value;
+  const data = state.series;
+  const last = data.at(-1);
+  const first = data[0];
+  const change = (last - first) / first;
+  const recent = data.slice(-16);
+  const recentHigh = Math.max(...recent);
+  const recentLow = Math.min(...recent);
+  const momentum = last > recent.reduce((a, b) => a + b, 0) / recent.length;
+  const bullish = change > 0.006 && momentum;
+  const bearish = change < -0.006 && !momentum;
+  const side = bullish ? "LONG" : bearish ? "SHORT" : "WAIT";
+  const stats = candleStats();
+  const realizedVolatility = Math.max(profile.volatility * 0.65, stats.avgRange);
+  const volatility = realizedVolatility * (mode === "aggressive" ? 1.15 : mode === "conservative" ? 0.85 : 1);
+  const confidence = side === "WAIT" ? 58 : Math.min(91, Math.round(62 + Math.abs(change) * 900 + risk * 4));
+
+  const entry = last;
+  const stopDistance = entry * volatility * (side === "WAIT" ? 0.8 : 1.05);
+  const targetDistance = stopDistance * (mode === "aggressive" ? 2.4 : mode === "conservative" ? 1.45 : 1.9);
+  const stop = side === "SHORT" ? entry + stopDistance : entry - stopDistance;
+  const target1 = side === "SHORT" ? entry - targetDistance : entry + targetDistance;
+  const target2 = side === "SHORT" ? entry - targetDistance * 1.55 : entry + targetDistance * 1.55;
+  const account = 10000;
+  const riskBudget = account * (risk / 100);
+  const size = side === "WAIT" ? 0 : riskBudget / Math.abs(entry - stop);
+
+  state.plan = {
+    pairKey,
+    side,
+    entry,
+    stop,
+    target1,
+    target2,
+    confidence,
+    size,
+    rr: Math.abs(target1 - entry) / Math.abs(entry - stop),
+    thesis: "",
+  };
+  state.plan.thesis = buildThesis(state.plan);
+  state.passportIssued = false;
+
+  updatePlanUI();
+  updateDeskUI();
+  drawChart();
+  logDecision(
+    t("planGeneratedTitle", { side: sideLabel(side) }),
+    t("planGeneratedBody", { pair: profile.label, timeframe: timeframeLabel(), confidence, risk })
+  );
+}
+
+function buildCouncil(plan, change) {
+  const profile = pairProfiles[plan.pairKey];
+  const stats = candleStats();
+  const book = bookStats();
+  const alignedMomentum = plan.side === "WAIT" ? false : (plan.side === "LONG" && change > 0) || (plan.side === "SHORT" && change < 0);
+  const rrOk = plan.side !== "WAIT" && plan.rr >= 1.45;
+  const bookOk = book ? book.spreadBps < 8 && Math.abs(book.imbalance) < 42 : false;
+  const liquidityOk = bookOk || stats.lastVolume >= stats.avgVolume * 0.72 || profile.liquidity !== "moderate" || plan.confidence > 74;
+  const contextVote = state.context.score >= 62 ? "approve" : state.context.score >= 38 ? "caution" : "veto";
+  return [
+    {
+      role: "momentumReviewer",
+      vote: alignedMomentum ? "approve" : "veto",
+      reason: alignedMomentum ? "voteMomentumOk" : "voteMomentumBad",
+    },
+    {
+      role: "riskReviewer",
+      vote: rrOk ? "approve" : "veto",
+      reason: rrOk ? "voteRiskOk" : "voteRiskBad",
+    },
+    {
+      role: "liquidityReviewer",
+      vote: liquidityOk ? "approve" : "caution",
+      reason: liquidityOk ? "voteLiquidityOk" : "voteLiquidityBad",
+    },
+    {
+      role: "macroReviewer",
+      vote: contextVote,
+      reason: contextVote === "approve" ? "voteContextOk" : "voteContextBad",
+    },
+  ];
+}
+
+function buildStress(plan) {
+  if (plan.side === "WAIT") {
+    return [
+      { name: "shockDown", status: "watch", body: "stressShockBody" },
+      { name: "volatilityExpansion", status: "watch", body: "stressVolBody" },
+      { name: "lateEntry", status: "watch", body: "stressLateBody" },
+    ];
+  }
+  const shockLoss = Math.abs(plan.entry - plan.stop) * plan.size;
+  const volLoss = shockLoss * (pairProfiles[plan.pairKey].volatility > 0.03 ? 1.25 : 0.85);
+  const latePenalty = Math.abs(plan.target1 - plan.entry) / Math.abs(plan.entry - plan.stop);
+  return [
+    { name: "shockDown", status: shockLoss <= 160 ? "pass" : "fail", body: "stressShockBody" },
+    { name: "volatilityExpansion", status: volLoss <= 190 ? "pass" : "watch", body: "stressVolBody" },
+    { name: "lateEntry", status: latePenalty >= 1.6 ? "pass" : "watch", body: "stressLateBody" },
+  ];
+}
+
+function buildGate(plan) {
+  const votes = state.council;
+  const stress = state.stress;
+  const vetoes = votes.filter((vote) => vote.vote === "veto").length;
+  const cautions = votes.filter((vote) => vote.vote === "caution").length + stress.filter((item) => item.status === "watch").length;
+  const failures = stress.filter((item) => item.status === "fail").length;
+  if (plan.side === "WAIT" || vetoes > 0 || failures > 0) {
+    return { decision: "vetoTrade", score: 22, reason: "gateVeto" };
+  }
+  if (cautions > 1 || plan.confidence < 72) {
+    return { decision: "cautionTrade", score: 58, reason: "gateCaution" };
+  }
+  return { decision: "allowTrade", score: 88, reason: "gateAllow" };
+}
+
+function updateDeskUI() {
+  if (!state.plan) {
+    state.council = [];
+    state.stress = [];
+    state.gate = null;
+    setTone(document.querySelector(".gate-panel"), ["good", "watch", "bad"], "");
+    $("gateBadge").className = "badge";
+    $("gateDecision").textContent = t("noDecision");
+    $("gateBadge").textContent = "--";
+    $("gateReason").textContent = t("gateReasonEmpty");
+    $("gateMeter").style.width = "0%";
+    $("councilList").innerHTML = emptyDeskCard(t("waitingScan"));
+    $("stressList").innerHTML = emptyDeskCard(t("gateReasonEmpty"));
+    renderEdgeDecomposer();
+    renderRealityHarness();
+    renderDemoRunway();
+    return;
+  }
+
+  const first = state.series[0];
+  const last = state.series.at(-1);
+  const change = (last - first) / first;
+  state.council = buildCouncil(state.plan, change);
+  state.stress = buildStress(state.plan);
+  state.gate = buildGate(state.plan);
+  const gateTone = state.gate.decision === "allowTrade" ? "good" : state.gate.decision === "cautionTrade" ? "watch" : "bad";
+  setTone(document.querySelector(".gate-panel"), ["good", "watch", "bad"], gateTone);
+  $("gateBadge").className = `badge ${gateTone}`;
+
+  $("gateDecision").textContent = t(state.gate.decision);
+  $("gateBadge").textContent = `${state.gate.score}/100`;
+  $("gateReason").textContent = t(state.gate.reason);
+  $("gateMeter").style.width = `${state.gate.score}%`;
+  $("councilList").innerHTML = state.council.map(renderVote).join("");
+  $("stressList").innerHTML = state.stress.map(renderStress).join("");
+  renderEdgeDecomposer();
+  renderRealityHarness();
+  renderDemoRunway();
+}
+
+function emptyDeskCard(text) {
+  return `<div class="vote-card"><p>${text}</p></div>`;
+}
+
+function renderVote(item) {
+  return `
+    <div class="vote-card">
+      <div class="vote-top">
+        <strong>${t(item.role)}</strong>
+        <span class="vote-tag ${item.vote}">${t(item.vote)}</span>
+      </div>
+      <p>${t(item.reason)}</p>
+    </div>
+  `;
+}
+
+function renderStress(item) {
+  return `
+    <div class="stress-card">
+      <div class="stress-top">
+        <strong>${t(item.name)}</strong>
+        <span class="stress-tag ${item.status}">${t(item.status)}</span>
+      </div>
+      <p>${t(item.body)}</p>
+    </div>
+  `;
+}
+
+function runKillSwitchDrill() {
+  const seed = Date.now() % 100000;
+  const exposure = state.plan ? Math.min(18, Math.round(state.plan.size * state.plan.entry * 0.018)) : Math.round(4 + seededNoise(seed) * 8);
+  const latency = Math.round(80 + seededNoise(seed + 3) * 680);
+  const slippage = Math.round(2 + seededNoise(seed + 9) * 42);
+  const fail = latency > 560 || slippage > 34 || exposure > 14;
+  const watch = !fail && (latency > 360 || slippage > 20 || exposure > 10);
+  const status = fail ? "fail" : watch ? "watch" : "pass";
+  const action = fail ? "drillFail" : watch ? "drillWatch" : "drillPass";
+  state.drill = { latency, slippage, exposure, status, action };
+  renderDrill();
+  logDecision(
+    t("drillLoggedTitle"),
+    t("drillLoggedBody", { action: t(action), latency, slippage, exposure })
+  );
+}
+
+function renderDrill() {
+  const drill = state.drill || { latency: "--", slippage: "--", exposure: "--", status: "watch", action: "drillWatch" };
+  $("drillBoard").innerHTML = [
+    ["drillLatency", `${drill.latency}${drill.latency === "--" ? "" : "ms"}`, drill.status],
+    ["drillSlippage", `${drill.slippage}${drill.slippage === "--" ? "" : "bps"}`, drill.status],
+    ["drillExposure", `${drill.exposure}${drill.exposure === "--" ? "" : "%"}`, drill.status],
+    ["drillAction", t(drill.action), drill.status],
+  ]
+    .map(([label, value, status]) => `<div class="drill-cell ${status}"><span>${t(label)}</span><strong>${value}</strong></div>`)
+    .join("");
+}
+
+function renderShockLab() {
+  const move = Number($("shockMove")?.value || 0);
+  const depthRemoved = Number($("shockDepth")?.value || 0);
+  const latency = Number($("shockLatency")?.value || 0);
+  const book = bookStats();
+  const candles = candleStats();
+  const spreadPenalty = book ? Math.min(35, book.spreadBps * 2.2) : 12;
+  const rangePenalty = Math.min(30, candles.avgRange * 900);
+  const score = move * 4.2 + depthRemoved * 0.42 + latency * 0.035 + spreadPenalty + rangePenalty;
+  const stateKey = score > 86 ? "freeze" : score > 52 ? "reduce" : "normal";
+  const verdictKey = stateKey === "freeze" ? "shockFreeze" : stateKey === "reduce" ? "shockReduce" : "shockNormal";
+  const noteKey = stateKey === "freeze" ? "shockFreezeNote" : stateKey === "reduce" ? "shockReduceNote" : "shockNormalNote";
+  $("shockResult").className = `shock-result ${stateKey}`;
+  $("shockResult").innerHTML = `
+    <div><span>${t("shockVerdict")}</span><strong>${t(verdictKey)}</strong></div>
+    <div><span>${t("shockNotes")}</span><p>${t(noteKey)}</p></div>
+  `;
+}
+
+function updateMarketUI({ preservePlan = false } = {}) {
+  const pairKey = $("pairSelect").value;
+  const profile = pairProfiles[pairKey];
+  if (!state.series.length) {
+    setCandles(buildCandles(pairKey));
+    state.dataSource = "simulated";
+  }
+  if (!preservePlan) {
+    state.plan = null;
+    state.passportIssued = false;
+  }
+  const first = state.series[0];
+  const last = state.series.at(-1);
+  const change = ((last - first) / first) * 100;
+  $("pairTitle").textContent = profile.label;
+  $("lastPrice").textContent = money(last);
+  flashPrice();
+  $("priceChange").textContent = `${change >= 0 ? "+" : ""}${change.toFixed(2)}%`;
+  $("priceChange").className = change >= 0 ? "positive" : "negative";
+  if (preservePlan && state.plan) {
+    updatePlanUI();
+    updateDeskUI();
+  } else {
+    $("trendSignal").textContent = t("awaitingAnalysis");
+    $("volatilitySignal").textContent = "--";
+    $("liquiditySignal").textContent = "--";
+    $("newsSignal").textContent = "--";
+    $("confidenceScore").textContent = "--";
+    updatePlanUI();
+    updateDeskUI();
+  }
+  updateDataSourceLabel();
+  renderFingerprint();
+  renderOrderBook();
+  renderRegimeMap();
+  renderPassport();
+  drawChart();
+}
+
+function currentMarketKey() {
+  return `${$("pairSelect").value}:${$("timeframeSelect").value}`;
+}
+
+async function loadMarketData({ log = false, preservePlan = false, allowStale = false } = {}) {
+  const pairKey = $("pairSelect").value;
+  const profile = pairProfiles[pairKey];
+  const requestKey = currentMarketKey();
+  const requestId = state.activeRequestId + 1;
+  state.activeRequestId = requestId;
+  state.refreshMode = log ? "monitorManual" : "monitorAuto";
+  state.dataSource = "loading";
+  updateDataSourceLabel();
+  setStatus("analyzing");
+  if (!preservePlan) {
+    state.plan = null;
+    state.gate = null;
+    state.council = [];
+    state.stress = [];
+    state.passportIssued = false;
+    updatePlanUI();
+    updateDeskUI();
+    renderPassport();
+  }
+  try {
+    const [candles, orderBook] = await Promise.all([
+      timed("candles", () => fetchBitgetCandles(pairKey)),
+      timed("book", () => fetchBitgetOrderBook(pairKey)).catch(() => null),
+    ]);
+    if (requestId !== state.activeRequestId || requestKey !== currentMarketKey()) return;
+    setCandles(candles);
+    state.orderBook = orderBook;
+    state.dataSource = "bitget";
+    state.marketKey = requestKey;
+    state.lastUpdated = shortTime();
+    if (log) {
+      logDecision(t("dataLoadedTitle"), t("dataLoadedBody", { pair: profile.label, count: state.series.length }));
+    }
+  } catch (error) {
+    if (requestId !== state.activeRequestId || requestKey !== currentMarketKey()) return;
+    if (allowStale && state.candles.length && state.marketKey === requestKey) {
+      state.dataSource = "stale";
+      if (log) {
+        logDecision(t("dataStaleTitle"), t("dataStaleBody"));
+      }
+    } else {
+      setCandles(buildCandles(pairKey));
+      state.orderBook = null;
+      state.dataSource = "fallback";
+      state.marketKey = requestKey;
+      state.lastUpdated = shortTime();
+      if (log) {
+        logDecision(t("dataFallbackTitle"), t("dataFallbackBody"));
+      }
+    }
+  }
+  loadContextFeed({ log });
+  updateMarketUI({ preservePlan });
+  renderBoundary();
+  renderProvenanceTape();
+  renderSystemMonitor();
+  setStatus("ready");
+}
+
+function startAutoRefresh() {
+  if (state.refreshTimer) window.clearInterval(state.refreshTimer);
+  state.refreshTimer = window.setInterval(() => {
+    loadMarketData({ log: false, preservePlan: true, allowStale: true });
+  }, 15000);
+}
+
+function updatePlanUI() {
+  const plan = state.plan;
+  const planPanel = document.querySelector(".plan-panel");
+  const confidenceCell = $("confidenceScore")?.parentElement;
+  if (!plan) {
+    setTone(planPanel, ["good", "watch", "bad"], "");
+    setTone($("planBadge"), ["good", "watch", "bad"], "");
+    setTone(confidenceCell, ["good", "watch", "bad"], "");
+    $("planAction").textContent = t("standBy");
+    $("planBadge").textContent = t("waiting");
+    $("entryPrice").textContent = "--";
+    $("stopPrice").textContent = "--";
+    $("targetOne").textContent = "--";
+    $("targetTwo").textContent = "--";
+    $("positionSize").textContent = "--";
+    $("riskReward").textContent = "--";
+    $("agentThesis").textContent = t("noPlanThesis");
+    renderDemoRunway();
+    return;
+  }
+
+  const planTone = plan.side === "WAIT" ? "bad" : plan.confidence >= 76 ? "good" : "watch";
+  setTone(planPanel, ["good", "watch", "bad"], planTone);
+  setTone($("planBadge"), ["good", "watch", "bad"], planTone);
+  setTone(confidenceCell, ["good", "watch", "bad"], planTone);
+  $("planAction").textContent = plan.side === "WAIT" ? t("noTrade") : t(plan.side === "LONG" ? "longSetup" : "shortSetup");
+  $("planBadge").textContent = `${plan.confidence}%`;
+  $("entryPrice").textContent = money(plan.entry);
+  $("stopPrice").textContent = money(plan.stop);
+  $("targetOne").textContent = money(plan.target1);
+  $("targetTwo").textContent = money(plan.target2);
+  $("positionSize").textContent = plan.side === "WAIT" ? "0.0000" : plan.size.toFixed(4);
+  $("riskReward").textContent = plan.side === "WAIT" ? "--" : `1:${plan.rr.toFixed(2)}`;
+  $("agentThesis").textContent = plan.thesis;
+  $("confidenceScore").textContent = `${plan.confidence}%`;
+  $("trendSignal").textContent = plan.side === "WAIT" ? t("neutralRange") : plan.side === "LONG" ? t("bullishMomentum") : t("bearishPressure");
+  const stats = candleStats();
+  const book = bookStats();
+  $("volatilitySignal").textContent = stats.avgRange > 0.028 ? t("elevated") : t("normal");
+  $("liquiditySignal").textContent =
+    book && book.spreadBps < 8 && Math.abs(book.imbalance) < 42
+      ? t("strong")
+      : stats.lastVolume >= stats.avgVolume
+        ? t("strong")
+        : liquidityText(pairProfiles[plan.pairKey]);
+  $("newsSignal").textContent = newsText(pairProfiles[plan.pairKey]);
+  renderDemoRunway();
+}
+
+function runPaperTrade() {
+  if (!state.plan) {
+    generatePlan();
+  }
+
+  const plan = state.plan;
+  if (plan.side === "WAIT") {
+    setStatus("watching");
+    logDecision(t("tradeSkippedTitle"), t("tradeSkippedBody"));
+    renderDemoRunway();
+    return;
+  }
+
+  if (!state.gate || state.gate.decision === "vetoTrade") {
+    updateDeskUI();
+    setStatus("watching");
+    logDecision(t("gateBlockedTitle"), t("gateBlockedBody"));
+    renderDemoRunway();
+    return;
+  }
+
+  setStatus("simulating");
+  const path = buildForwardPath(plan);
+  const result = resolvePaperTrade(plan, path);
+  const exit = result.exit;
+  const pnl = (plan.side === "LONG" ? exit - plan.entry : plan.entry - exit) * plan.size;
+  state.sessionPnl += pnl;
+
+  state.orders.unshift({
+    time: nowTime(),
+    pair: pairProfiles[plan.pairKey].label,
+    side: plan.side,
+    entry: plan.entry,
+    exit,
+    pnl,
+    exitReason: result.exitReason,
+  });
+
+  renderOrders();
+  $("sessionPnl").textContent = money(state.sessionPnl);
+  $("sessionPnl").className = state.sessionPnl >= 0 ? "positive" : "negative";
+  setStatus("ready");
+  logDecision(
+    t("tradeClosedTitle"),
+    t("tradeClosedBody", {
+      side: sideLabel(plan.side),
+      pair: pairProfiles[plan.pairKey].label,
+      exit: money(exit),
+      exitReason: t(result.exitReason),
+      result: t(pnl >= 0 ? "profit" : "loss"),
+      pnl: money(pnl),
+    })
+  );
+  renderDemoRunway();
+}
+
+function buildForwardPath(plan) {
+  const basePath = state.series.slice(-18);
+  const direction = plan.side === "LONG" ? 1 : -1;
+  const volatility = pairProfiles[plan.pairKey].volatility;
+  let price = plan.entry;
+  return basePath.map((historicPrice, index) => {
+    const historicMove = (historicPrice - basePath[0]) / basePath[0];
+    const shock = (seededNoise(Date.now() / 1000 + index * 17) - 0.5) * volatility * 1.8;
+    const meanReversion = -direction * volatility * 0.18 * index;
+    price *= 1 + historicMove * 0.18 + shock + meanReversion;
+    return Number(price.toFixed(6));
+  });
+}
+
+function resolvePaperTrade(plan, path) {
+  for (const price of path) {
+    if (plan.side === "LONG" && price <= plan.stop) return { exit: plan.stop, exitReason: "stopLoss" };
+    if (plan.side === "LONG" && price >= plan.target1) return { exit: plan.target1, exitReason: "takeProfit" };
+    if (plan.side === "SHORT" && price >= plan.stop) return { exit: plan.stop, exitReason: "stopLoss" };
+    if (plan.side === "SHORT" && price <= plan.target1) return { exit: plan.target1, exitReason: "takeProfit" };
+  }
+  return { exit: path.at(-1) || plan.entry, exitReason: "timeExit" };
+}
+
+function renderOrders() {
+  const body = $("ordersBody");
+  body.innerHTML = "";
+  if (!state.orders.length) {
+    body.innerHTML = `<tr class="empty-row"><td colspan="6">${t("noTrades")}</td></tr>`;
+    return;
+  }
+  state.orders.forEach((order) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${order.time}</td>
+      <td>${order.pair}</td>
+      <td>${sideLabel(order.side)}</td>
+      <td>${money(order.entry)}</td>
+      <td>${money(order.exit)}</td>
+      <td class="${order.pnl >= 0 ? "positive" : "negative"}">${money(order.pnl)}</td>
+    `;
+    body.appendChild(row);
+  });
+}
+
+function resetSession() {
+  state.orders = [];
+  state.sessionPnl = 0;
+  $("sessionPnl").textContent = "$0.00";
+  $("sessionPnl").className = "";
+  renderOrders();
+  logDecision(t("resetTitle"), t("resetBody"));
+  renderDemoRunway();
+}
+
+function applyLanguage(lang) {
+  state.lang = lang;
+  document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    element.textContent = t(element.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
+    element.setAttribute("aria-label", t(element.dataset.i18nAria));
+  });
+  document.querySelectorAll(".lang-option").forEach((button) => {
+    button.classList.toggle("active", button.dataset.lang === lang);
+  });
+  setStatus(state.status);
+  updateDataSourceLabel();
+  renderBoundary();
+  renderProvenanceTape();
+  renderSystemMonitor();
+  renderContextFeed();
+  updatePlanUI();
+  updateDeskUI();
+  renderDrill();
+  renderShockLab();
+  renderFingerprint();
+  renderOrderBook();
+  renderRegimeMap();
+  renderEdgeDecomposer();
+  renderRealityHarness();
+  renderPassport();
+  renderOrders();
+  renderDemoRunway();
+  drawChart();
+}
+
+function openProjectInfo() {
+  $("projectInfoModal").classList.add("open");
+  $("projectInfoModal").setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+  $("projectInfoClose").focus();
+}
+
+function closeProjectInfo() {
+  $("projectInfoModal").classList.remove("open");
+  $("projectInfoModal").setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+  $("projectInfoBtn").focus();
+}
+
+$("pairSelect").addEventListener("change", () => loadMarketData({ log: true, preservePlan: false, allowStale: false }));
+$("timeframeSelect").addEventListener("change", () => {
+  logDecision(t("timeframeChangedTitle"), t("timeframeChangedBody", { timeframe: timeframeLabel() }));
+  loadMarketData({ log: true, preservePlan: false, allowStale: false });
+});
+$("riskSlider").addEventListener("input", (event) => {
+  $("riskValue").textContent = `${Number(event.target.value).toFixed(2)}%`;
+});
+$("analyzeBtn").addEventListener("click", () => {
+  setStatus("analyzing");
+  setTimeout(() => {
+    generatePlan();
+    setStatus("ready");
+  }, 280);
+});
+$("simulateBtn").addEventListener("click", runPaperTrade);
+$("resetBtn").addEventListener("click", resetSession);
+$("refreshBtn").addEventListener("click", () => loadMarketData({ log: true, preservePlan: true, allowStale: true }));
+$("drillBtn").addEventListener("click", runKillSwitchDrill);
+$("passportBtn").addEventListener("click", () => {
+  renderPassport();
+  if (state.plan && state.gate) {
+    state.passportIssued = true;
+    renderDemoRunway();
+  }
+  logDecision(t("decisionPassport"), t("auditCard"));
+});
+$("copyPassportBtn").addEventListener("click", copyPassportSummary);
+$("projectInfoBtn").addEventListener("click", openProjectInfo);
+$("projectInfoClose").addEventListener("click", closeProjectInfo);
+$("projectInfoModal").addEventListener("click", (event) => {
+  if (event.target === $("projectInfoModal")) closeProjectInfo();
+});
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && $("projectInfoModal").classList.contains("open")) {
+    closeProjectInfo();
+  }
+});
+document.querySelectorAll("[data-jump]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const target = $(`section-${button.dataset.jump}`);
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+["shockMove", "shockDepth", "shockLatency"].forEach((id) => {
+  $(id).addEventListener("input", renderShockLab);
+});
+document.querySelectorAll(".lang-option").forEach((button) => {
+  button.addEventListener("click", () => applyLanguage(button.dataset.lang));
+});
+window.addEventListener("resize", drawChart);
+
+const initialLang = (navigator.language || "").toLowerCase().startsWith("zh") ? "zh" : "en";
+applyLanguage(initialLang);
+loadMarketData({ log: false });
+startAutoRefresh();
