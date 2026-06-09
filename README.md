@@ -1,26 +1,29 @@
 # Signal Desk
 
-Signal Desk is a pre-trade risk desk demo for the Bitget AI x Crypto Hackathon.
+Signal Desk is an AI trading arena demo for the Bitget AI x Crypto Hackathon.
 
-It does not place live orders. The app focuses on the full decision loop a safer trading agent should show before execution:
+It does not place live orders. The app focuses on the full decision loop a trading agent should show before execution and while a paper position is live:
 
-1. Scan Bitget public market candles, with local fallback when live data is unavailable.
-2. Generate a trade plan with entry, stop, targets, position size, and risk/reward.
-3. Let a role-based signal council review the setup.
-4. Decompose the setup into measurable evidence: momentum, liquidity, volatility, context, and stress.
-5. Map the market into a regime quadrant using trend, volatility, liquidity, and context.
-6. Replay the plan across recent candle windows to reveal win rate, median outcome, and worst path.
-7. Run scenario stress tests and decide whether the Trade Gate allows execution.
-8. Run a paper trade simulation only when the gate permits it.
-9. Record the agent's reasoning and outcome in a decision log.
+1. Scan Bitget USDT-M futures ticker, candles, and depth, with local fallback when live data is unavailable.
+2. Let strategy agents debate the setup: Trend Hunter, Mean Reversion, Breakout Scout, and Risk Officer.
+3. Generate a trade plan with entry, stop, targets, position size, and risk/reward.
+4. Show what would make the agent change its mind before the trade is deployed.
+5. Deploy a live paper position when the Trade Gate allows it, then update mark price and unrealized PnL from market refreshes.
+6. Decompose the setup into measurable evidence: momentum, liquidity, volatility, context, and stress.
+7. Replay the plan across recent candle windows to reveal win rate, median outcome, and worst path.
+8. Record the agent's reasoning, thesis changes, and outcomes in a timeline and decision log.
 
 The interface supports English and Chinese from the language switch in the left sidebar.
 
-Market OHLCV candles and order book depth are loaded from Bitget's public spot market APIs when available:
+Market ticker price, OHLCV candles, and order book depth are loaded from Bitget's public USDT-M futures APIs when available:
 
-`GET https://api.bitget.com/api/v2/spot/market/candles`
+`GET https://api.bitget.com/api/v2/mix/market/candles`
 
-`GET https://api.bitget.com/api/v2/spot/market/orderbook`
+`GET https://api.bitget.com/api/v2/mix/market/ticker`
+
+`GET https://api.bitget.com/api/v2/mix/market/merge-depth`
+
+The header price uses the ticker endpoint so it tracks the latest public futures quote more closely. Candles are still used for charting, timeframe analysis, and replay logic, because the latest candle close can lag the exchange's visible last traded price.
 
 The context feed attempts to load public crypto headlines from CryptoCompare's public news endpoint:
 
@@ -40,24 +43,29 @@ Open `index.html` in a browser, then:
 1. Choose a market pair and risk level.
 2. Choose **EN** or **中文** if needed.
 3. Click **Analyze Market**.
-4. Review the generated plan, Signal Council votes, Trade Gate, and Stress Tape.
-5. Check the Edge Decomposer and Reality Harness to see why the setup is or is not attractive.
-6. Click **Run Paper Trade**.
-7. If the gate allows it, watch the paper order appear in the blotter and the decision log update.
+4. Review the Agent Trading Arena, generated plan, Trade Gate, and What Would Change My Mind panel.
+5. Click **Run Paper Trade**.
+6. Watch the live paper position update mark price, unrealized PnL, distance to stop, and distance to target.
+7. Check the Edge Decomposer, Reality Harness, and thesis timeline to see why the setup is or is not attractive.
 
 ## Hackathon Positioning
 
 Track: Trading Agent
 
-Pitch: A pre-trade risk committee that can veto weak crypto trades before execution.
+Pitch: A live AI trading arena where strategy agents debate real Bitget futures data, deploy paper trades, and explain what would make them change their mind.
 
-Signal Desk is not a generic AI trading chatbot. It behaves like a small risk committee: a signal council can approve, caution, or veto a setup before paper execution.
+Signal Desk is not a generic AI trading chatbot. It behaves like a small strategy desk: multiple agents argue for trend, mean reversion, breakout, or risk control, then the app turns the consensus into a bounded paper trade.
 
 ## Requirement Fit
 
 This MVP is aligned with the Bitget AI x Crypto Hackathon theme because it demonstrates an AI-style trading agent workflow:
 
 - Market perception: Bitget public OHLCV candle data with automatic refresh.
+- Live futures ticker: The headline price and paper-position mark use Bitget USDT-M futures ticker data.
+- Agent arena: Trend Hunter, Mean Reversion, Breakout Scout, and Risk Officer debate the same market.
+- Live paper position: Simulated deployment shows mark price, unrealized PnL, distance to stop, and distance to target.
+- Change-my-mind map: The agent exposes invalidation, confirmation, and risk-reduction triggers.
+- Thesis timeline: The agent records plan formation, paper deployment, live refreshes, and position resolution.
 - Order book pulse: Bid/ask depth, spread, and imbalance from Bitget public depth data.
 - Context feed: Best-effort public crypto headline feed with explicit fallback state.
 - Regime map: A two-axis market state visualization derived from loaded candles, book depth, and context score.
@@ -67,7 +75,7 @@ This MVP is aligned with the Bitget AI x Crypto Hackathon theme because it demon
 - Governance: Momentum, risk, liquidity, and context reviewers vote on the setup.
 - Edge decomposer: The plan is broken into momentum, liquidity, volatility, context, and stress evidence.
 - Reality harness: The current setup is replayed across recent OHLCV windows, showing win rate, median R, and worst path.
-- Pre-trade gate: The Trade Gate can block weak setups before simulation.
+- Trade gate: The Trade Gate can block weak setups or allow reduced-size paper deployment.
 - Stress tests: Adverse shock, volatility expansion, and late-entry scenarios.
 - Boundary ledger: The UI clearly marks which layers are live, derived, and simulated.
 - Provenance tape: A compact chain showing market feed, desk logic, and execution boundaries.
@@ -78,7 +86,7 @@ This MVP is aligned with the Bitget AI x Crypto Hackathon theme because it demon
 - Market fingerprint: A visual candle matrix derived from OHLCV direction, range, and volume.
 - Kill switch drill: A playful incident-response check for latency, slippage, and exposure.
 - What-if shock lab: Interactive price shock, depth removal, and latency sliders that return Normal, Reduce, or Freeze.
-- Execution simulation: Paper trade blotter with take-profit, stop-loss, and time-exit outcomes.
+- Execution simulation: Paper position monitor plus blotter with take-profit, stop-loss, and time-exit outcomes.
 - Explainability: Decision log and post-trade outcome summary.
 
 Important demo limits:
@@ -96,7 +104,7 @@ Typical remaining submission assets:
 
 ## Next Steps
 
-- Add Bitget order book depth, funding, and derivatives markets.
+- Add Bitget funding and open-interest feeds.
 - Add live news, macro calendar, and sentiment inputs.
 - Add an LLM reasoning layer with Qwen or OpenAI.
 - Add strategy backtesting across historical candles.

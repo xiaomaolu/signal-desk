@@ -26,6 +26,7 @@
           <div class="section-label" data-i18n="deskMap">Desk Map</div>
           <div class="desk-map-grid">
             <button type="button" data-jump="market" data-i18n="navMarket">Market</button>
+            <button type="button" data-jump="arena" data-i18n="navArena">Arena</button>
             <button type="button" data-jump="book" data-i18n="navBook">Book</button>
             <button type="button" data-jump="context" data-i18n="navContext">Context</button>
             <button type="button" data-jump="risk" data-i18n="navRisk">Risk</button>
@@ -215,6 +216,52 @@
               <span data-i18n="agentThesis">Agent thesis</span>
               <p id="agentThesis">Choose a pair and run analysis to generate a trade plan with risk controls.</p>
             </div>
+          </article>
+        </section>
+
+        <section class="arena-grid" id="section-arena">
+          <article class="panel arena-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="agentArena">Agent Trading Arena</p>
+                <h3 data-i18n="arenaTitle">Strategy desk battle</h3>
+              </div>
+              <span class="badge" id="arenaBadge">--</span>
+            </div>
+            <div id="arenaAgents" class="arena-agents"></div>
+          </article>
+
+          <article class="panel live-position-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="livePosition">Live Paper Position</p>
+                <h3 id="positionTitle" data-i18n="positionIdle">No active deployment</h3>
+              </div>
+              <span class="badge" id="positionBadge">FLAT</span>
+            </div>
+            <div id="positionBoard" class="position-board"></div>
+          </article>
+        </section>
+
+        <section class="thesis-grid">
+          <article class="panel mind-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="changeMind">What Would Change My Mind</p>
+                <h3 data-i18n="invalidationMap">Invalidation map</h3>
+              </div>
+            </div>
+            <div id="mindList" class="mind-list"></div>
+          </article>
+
+          <article class="panel thesis-timeline-panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow" data-i18n="thesisTimeline">Trade Thesis Timeline</p>
+                <h3 data-i18n="adaptiveReasoning">Adaptive reasoning</h3>
+              </div>
+            </div>
+            <ol id="thesisTimeline" class="thesis-timeline"></ol>
           </article>
         </section>
 

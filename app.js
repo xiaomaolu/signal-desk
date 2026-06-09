@@ -7,9 +7,10 @@ const pairProfiles = {
 
 const translations = {
   en: {
-    brandSubtitle: "Pre-trade risk desk for Bitget AI Hackathon",
+    brandSubtitle: "Agent trading arena for Bitget AI Hackathon",
     deskMap: "Desk Map",
     navMarket: "Market",
+    navArena: "Arena",
     navBook: "Book",
     navContext: "Context",
     navRisk: "Risk",
@@ -37,7 +38,7 @@ const translations = {
     boundaryLive: "Live",
     boundaryDerived: "Derived",
     boundarySim: "Sim",
-    boundaryLiveText: "Bitget public OHLCV candles and order book depth when the browser can reach the API.",
+    boundaryLiveText: "Bitget USDT-M futures ticker, OHLCV candles, and depth when the browser can reach the API.",
     boundaryDerivedText: "Signals, council votes, and trade gate are deterministic demo logic.",
     boundarySimText: "Paper execution, stress tape, and fallback candles are simulated.",
     provenanceTape: "Provenance Tape",
@@ -65,6 +66,7 @@ const translations = {
     passBoundaryText: "Live market feed, deterministic desk logic, simulated execution.",
     systemMonitor: "System Monitor",
     monitorCandles: "Candles",
+    monitorTicker: "Ticker",
     monitorBook: "Book",
     monitorRefresh: "Refresh",
     monitorMarket: "Market",
@@ -87,25 +89,86 @@ const translations = {
     runwayActive: "Active",
     runwayDone: "Done",
     runwayBlocked: "Blocked",
-    heroEyebrow: "Pre-trade Risk Desk",
-    heroTitle: "A council that can veto bad trades before they happen.",
+    heroEyebrow: "Agent Trading Arena",
+    heroTitle: "AI strategy agents debate, deploy paper trades, and adapt to live Bitget futures.",
     projectInfoOpen: "Open project introduction",
     projectInfoClose: "Close project introduction",
     projectInfoEyebrow: "Project Brief",
     projectInfoTitle: "Signal Desk",
-    projectInfoIntro: "Signal Desk is a pre-trade risk desk demo for the Bitget AI x Crypto Hackathon. It behaves like a trading committee that reviews a setup before any execution is considered.",
-    projectInfoBoundary: "The desk uses real Bitget candles and order book data when the browser can reach the public API. Paper execution, stress tests, fallback candles, and risk votes stay in the demo layer.",
+    projectInfoIntro: "Signal Desk is an AI trading arena demo for the Bitget AI x Crypto Hackathon. Multiple strategy agents debate live futures data, produce a plan, and deploy only paper trades.",
+    projectInfoBoundary: "The desk uses real Bitget USDT-M futures ticker, candles, and depth when the browser can reach the public API. Paper execution, stress tests, fallback candles, and risk votes stay in the demo layer.",
     projectInfoReal: "Real where possible",
-    projectInfoRealBody: "Bitget candles, order book depth, and best-effort public headlines.",
+    projectInfoRealBody: "Bitget futures ticker, candles, depth, and best-effort public headlines.",
     projectInfoDemo: "Demo boundary",
     projectInfoDemoBody: "No live orders, no custody, no financial advice.",
     projectInfoUnique: "Unique workflow",
-    projectInfoUniqueBody: "Signal Council, Trade Gate, Regime Map, Reality Harness, and Decision Passport.",
-    projectInfoNote: "The goal is not to claim the agent always wins, but to show how a trading agent can explain sources, refuse weak trades, and leave an auditable decision trail.",
+    projectInfoUniqueBody: "Agent Arena, live paper position, change-my-mind map, Trade Gate, Reality Harness, and Decision Passport.",
+    projectInfoNote: "The goal is not to claim the agent always wins, but to show how a trading agent can debate a setup, adapt its thesis, explain reversals, and leave an auditable decision trail.",
     agent: "Agent",
     confidence: "Confidence",
     sessionPnl: "Session PnL",
     liveSimulation: "Live Simulation",
+    agentArena: "Agent Trading Arena",
+    arenaTitle: "Strategy desk battle",
+    arenaEmpty: "Run analysis to let strategy agents debate this market.",
+    arenaConsensus: "Consensus",
+    arenaLong: "Long bias",
+    arenaShort: "Short bias",
+    arenaWait: "Wait",
+    arenaScore: "Arena score",
+    trendHunter: "Trend Hunter",
+    meanReversion: "Mean Reversion",
+    breakoutScout: "Breakout Scout",
+    riskOfficer: "Risk Officer",
+    trendHunterLong: "Slope and current price favor continuation.",
+    trendHunterShort: "Slope and current price favor downside continuation.",
+    trendHunterWait: "Trend lacks clean follow-through.",
+    meanReversionLong: "Price is near the lower range; bounce risk is attractive.",
+    meanReversionShort: "Price is near the upper range; fade risk is attractive.",
+    meanReversionWait: "Price is too centered for a clean mean-reversion bet.",
+    breakoutScoutLong: "Recent high is close; a breakout plan has room.",
+    breakoutScoutShort: "Recent low is close; breakdown continuation is live.",
+    breakoutScoutWait: "No decisive range break yet.",
+    riskOfficerLong: "Risk can be defined with a valid stop.",
+    riskOfficerShort: "Downside plan has a defined invalidation.",
+    riskOfficerWait: "Risk/reward or volatility blocks deployment.",
+    livePosition: "Live Paper Position",
+    positionIdle: "No active deployment",
+    positionActive: "Paper trade live",
+    positionClosed: "Paper trade closed",
+    markPrice: "Mark",
+    unrealizedPnl: "Unrealized PnL",
+    distanceToStop: "To stop",
+    distanceToTarget: "To target",
+    noPositionBody: "Deploy a paper trade to see live PnL react to Bitget futures ticks.",
+    changeMind: "What Would Change My Mind",
+    invalidationMap: "Invalidation map",
+    mindEmpty: "Run analysis to see the exact market conditions that would flip the agent.",
+    mindStop: "Invalidation",
+    mindTarget: "Confirmation",
+    mindReduce: "Reduce size",
+    mindWait: "Wait trigger",
+    mindStopLong: "Flip out if price loses {price}.",
+    mindStopShort: "Flip out if price reclaims {price}.",
+    mindTargetLong: "Raise confidence if price accepts above {price}.",
+    mindTargetShort: "Raise confidence if price accepts below {price}.",
+    mindReduceBody: "Reduce if spread widens or volatility expands before entry.",
+    mindWaitBody: "Stay flat until price escapes the recent {low} - {high} range.",
+    thesisTimeline: "Trade Thesis Timeline",
+    adaptiveReasoning: "Adaptive reasoning",
+    timelineEmpty: "The agent has not formed a thesis yet.",
+    timelineScan: "Market scan",
+    timelinePlan: "Plan formed",
+    timelineDeploy: "Paper deployment",
+    timelineRefresh: "Live refresh",
+    timelineClose: "Position resolved",
+    timelineScanBody: "{pair} loaded from Bitget futures. Arena is waiting for a trading thesis.",
+    timelinePlanBody: "{side} thesis at {entry} with {confidence}% confidence. Arena consensus: {consensus}.",
+    timelineDeployBody: "Paper agent deployed {side} at {entry}; live PnL now updates with market ticks.",
+    timelineRefreshBody: "Mark {price}; thesis is {state}.",
+    timelineCloseBody: "Paper position closed via {exitReason} at {exit}.",
+    thesisHealthy: "intact",
+    thesisThreatened: "under pressure",
     marketFingerprint: "Market Fingerprint",
     candleMatrix: "Candle matrix",
     orderBookPulse: "Order Book Pulse",
@@ -172,7 +235,7 @@ const translations = {
     watching: "Watching",
     simulating: "Simulating",
     waitingScan: "Agent is waiting for a market scan.",
-    bitgetLive: "Bitget live",
+    bitgetLive: "Bitget futures live",
     simulated: "Simulated",
     loadingData: "Loading data",
     fallbackData: "Fallback data",
@@ -311,9 +374,10 @@ const translations = {
     shockFreezeNote: "Shock breaches limits. The desk freezes execution and waits for a fresh market read.",
   },
   zh: {
-    brandSubtitle: "面向 Bitget AI 黑客松的交易前风控台",
+    brandSubtitle: "面向 Bitget AI 黑客松的 Agent 交易竞技场",
     deskMap: "工作台地图",
     navMarket: "市场",
+    navArena: "竞技场",
     navBook: "盘口",
     navContext: "上下文",
     navRisk: "风控",
@@ -341,7 +405,7 @@ const translations = {
     boundaryLive: "真实",
     boundaryDerived: "推导",
     boundarySim: "模拟",
-    boundaryLiveText: "浏览器可访问 API 时，OHLCV K 线和盘口深度来自 Bitget 公共行情。",
+    boundaryLiveText: "浏览器可访问 API 时，现价、OHLCV K 线和深度来自 Bitget USDT-M 永续公共行情。",
     boundaryDerivedText: "信号、委员会投票和交易闸门是确定性的演示逻辑。",
     boundarySimText: "模拟执行、压力测试和备用 K 线属于模拟层。",
     provenanceTape: "来源磁带",
@@ -369,6 +433,7 @@ const translations = {
     passBoundaryText: "真实市场数据、确定性风控逻辑、模拟执行。",
     systemMonitor: "系统监控",
     monitorCandles: "K线",
+    monitorTicker: "现价",
     monitorBook: "盘口",
     monitorRefresh: "刷新",
     monitorMarket: "市场",
@@ -391,25 +456,86 @@ const translations = {
     runwayActive: "进行中",
     runwayDone: "完成",
     runwayBlocked: "阻止",
-    heroEyebrow: "交易前风控台",
-    heroTitle: "一个能在坏交易发生前投票否决的交易委员会。",
+    heroEyebrow: "Agent 交易竞技场",
+    heroTitle: "AI 策略 Agent 会辩论、部署模拟仓位，并跟随 Bitget 永续实时调整观点。",
     projectInfoOpen: "打开项目介绍",
     projectInfoClose: "关闭项目介绍",
     projectInfoEyebrow: "项目简介",
     projectInfoTitle: "Signal Desk",
-    projectInfoIntro: "Signal Desk 是一个面向 Bitget AI x Crypto Hackathon 的交易前风控台 Demo。它像一个交易委员会，会在执行前先审查交易设置。",
-    projectInfoBoundary: "浏览器可访问公共接口时，风控台会使用真实 Bitget K 线和盘口数据。模拟执行、压力测试、备用 K 线和风控投票仍属于 Demo 层。",
+    projectInfoIntro: "Signal Desk 是一个面向 Bitget AI x Crypto Hackathon 的 AI 交易竞技场 Demo。多个策略 Agent 会围绕实时永续行情辩论、生成计划，并只部署模拟交易。",
+    projectInfoBoundary: "浏览器可访问公共接口时，风控台会使用真实 Bitget USDT-M 永续现价、K 线和深度数据。模拟执行、压力测试、备用 K 线和风控投票仍属于 Demo 层。",
     projectInfoReal: "尽量真实",
-    projectInfoRealBody: "Bitget K 线、盘口深度，以及尽力拉取的公开新闻标题。",
+    projectInfoRealBody: "Bitget 永续现价、K 线、深度，以及尽力拉取的公开新闻标题。",
     projectInfoDemo: "Demo 边界",
     projectInfoDemoBody: "不下真实订单，不托管资产，不构成投资建议。",
     projectInfoUnique: "独特流程",
-    projectInfoUniqueBody: "信号委员会、交易闸门、市场状态地图、现实回放器和决策护照。",
-    projectInfoNote: "目标不是宣称 Agent 总能赚钱，而是展示交易 Agent 如何解释数据来源、拒绝弱交易，并留下可审计的决策轨迹。",
+    projectInfoUniqueBody: "Agent 竞技场、实时模拟仓位、反转条件地图、交易闸门、现实回放器和决策护照。",
+    projectInfoNote: "目标不是宣称 Agent 总能赚钱，而是展示交易 Agent 如何辩论交易、动态调整观点、解释反转条件，并留下可审计的决策轨迹。",
     agent: "Agent",
     confidence: "置信度",
     sessionPnl: "本轮盈亏",
     liveSimulation: "实时模拟",
+    agentArena: "Agent 交易竞技场",
+    arenaTitle: "策略席位对战",
+    arenaEmpty: "运行分析后，让策略 Agent 围绕当前市场辩论。",
+    arenaConsensus: "共识",
+    arenaLong: "偏多",
+    arenaShort: "偏空",
+    arenaWait: "等待",
+    arenaScore: "竞技分",
+    trendHunter: "趋势猎手",
+    meanReversion: "均值回归",
+    breakoutScout: "突破侦察",
+    riskOfficer: "风险官",
+    trendHunterLong: "斜率与现价支持趋势延续。",
+    trendHunterShort: "斜率与现价支持下行动能延续。",
+    trendHunterWait: "趋势延续不够干净。",
+    meanReversionLong: "价格接近区间下沿，反弹风险回报较好。",
+    meanReversionShort: "价格接近区间上沿，回落交易更有吸引力。",
+    meanReversionWait: "价格处于区间中部，均值回归优势不清晰。",
+    breakoutScoutLong: "价格接近近期高点，突破计划有空间。",
+    breakoutScoutShort: "价格接近近期低点，跌破延续仍然存在。",
+    breakoutScoutWait: "暂未出现明确区间突破。",
+    riskOfficerLong: "做多风险可以用明确止损定义。",
+    riskOfficerShort: "做空计划有清晰失效位。",
+    riskOfficerWait: "盈亏比或波动环境阻止部署。",
+    livePosition: "实时模拟仓位",
+    positionIdle: "暂无部署",
+    positionActive: "模拟交易运行中",
+    positionClosed: "模拟交易已结束",
+    markPrice: "标记价",
+    unrealizedPnl: "浮动盈亏",
+    distanceToStop: "距止损",
+    distanceToTarget: "距目标",
+    noPositionBody: "部署模拟交易后，浮动盈亏会随 Bitget 永续价格跳动。",
+    changeMind: "什么会让我改变主意",
+    invalidationMap: "失效条件地图",
+    mindEmpty: "运行分析后，查看会让 Agent 反转观点的具体市场条件。",
+    mindStop: "失效",
+    mindTarget: "确认",
+    mindReduce: "降仓",
+    mindWait: "等待触发",
+    mindStopLong: "如果价格跌破 {price}，退出多头观点。",
+    mindStopShort: "如果价格重新站上 {price}，退出空头观点。",
+    mindTargetLong: "如果价格接受在 {price} 上方，提高信心。",
+    mindTargetShort: "如果价格接受在 {price} 下方，提高信心。",
+    mindReduceBody: "如果入场前价差扩大或波动放大，降低仓位。",
+    mindWaitBody: "保持空仓，直到价格脱离近期 {low} - {high} 区间。",
+    thesisTimeline: "交易观点时间轴",
+    adaptiveReasoning: "动态推理",
+    timelineEmpty: "Agent 还没有形成交易观点。",
+    timelineScan: "市场扫描",
+    timelinePlan: "计划形成",
+    timelineDeploy: "模拟部署",
+    timelineRefresh: "实时刷新",
+    timelineClose: "仓位结束",
+    timelineScanBody: "{pair} 已从 Bitget 永续载入。竞技场正在等待交易观点。",
+    timelinePlanBody: "{side} 观点，入场 {entry}，置信度 {confidence}%。竞技场共识：{consensus}。",
+    timelineDeployBody: "模拟 Agent 已在 {entry} 部署 {side}，浮动盈亏开始跟随价格变化。",
+    timelineRefreshBody: "标记价 {price}，观点状态：{state}。",
+    timelineCloseBody: "模拟仓位通过{exitReason}在 {exit} 结束。",
+    thesisHealthy: "仍然有效",
+    thesisThreatened: "承压",
     marketFingerprint: "市场指纹",
     candleMatrix: "K 线矩阵",
     orderBookPulse: "盘口脉冲",
@@ -476,7 +602,7 @@ const translations = {
     watching: "观察中",
     simulating: "模拟中",
     waitingScan: "Agent 正在等待市场扫描。",
-    bitgetLive: "Bitget 实时",
+    bitgetLive: "Bitget 永续实时",
     simulated: "模拟数据",
     loadingData: "加载数据中",
     fallbackData: "备用数据",
@@ -619,9 +745,13 @@ const translations = {
 const state = {
   candles: [],
   orderBook: null,
+  marketPrice: null,
   series: [],
   plan: null,
   orders: [],
+  livePosition: null,
+  arena: [],
+  thesisEvents: [],
   sessionPnl: 0,
   lang: "en",
   status: "ready",
@@ -630,7 +760,7 @@ const state = {
   lastUpdated: null,
   activeRequestId: 0,
   marketKey: "",
-  latencies: { candles: null, book: null },
+  latencies: { candles: null, ticker: null, book: null },
   refreshMode: "monitorAuto",
   context: { source: "loading", headlines: [], score: 50, tone: "watch" },
   council: [],
@@ -749,10 +879,10 @@ function buildCandles(pairKey) {
 
 function bitgetGranularity() {
   const value = $("timeframeSelect").value;
-  if (value === "15m") return "15min";
-  if (value === "4h") return "4h";
-  if (value === "1day") return "1day";
-  return "1h";
+  if (value === "15m") return "15m";
+  if (value === "4h") return "4H";
+  if (value === "1day") return "1D";
+  return "1H";
 }
 
 async function fetchJsonWithTimeout(url, timeoutMs = 8000) {
@@ -791,7 +921,7 @@ async function timed(label, task) {
 async function fetchBitgetCandles(pairKey) {
   const symbol = pairKey;
   const granularity = bitgetGranularity();
-  const url = `https://api.bitget.com/api/v2/spot/market/candles?symbol=${symbol}&granularity=${granularity}&limit=72`;
+  const url = `https://api.bitget.com/api/v2/mix/market/candles?symbol=${symbol}&productType=usdt-futures&granularity=${granularity}&limit=72`;
   const payload = await fetchJsonWithTimeout(url);
   if (payload.code !== "00000" || !Array.isArray(payload.data)) {
     throw new Error(payload.msg || "Unexpected Bitget payload");
@@ -811,8 +941,30 @@ async function fetchBitgetCandles(pairKey) {
   return candles;
 }
 
+async function fetchBitgetTicker(pairKey) {
+  const url = `https://api.bitget.com/api/v2/mix/market/ticker?symbol=${pairKey}&productType=usdt-futures`;
+  const payload = await fetchJsonWithTimeout(url);
+  if (payload.code !== "00000" || !payload.data) {
+    throw new Error(payload.msg || "Unexpected Bitget ticker payload");
+  }
+  const ticker = Array.isArray(payload.data) ? payload.data.find((item) => item.symbol === pairKey) || payload.data[0] : payload.data;
+  const last =
+    Number(ticker.lastPr) ||
+    Number(ticker.close) ||
+    Number(ticker.last) ||
+    Number(ticker.price);
+  const change24h = Number(ticker.change24h ?? ticker.changeUtc24h ?? ticker.priceChangePercent);
+  const ts = Number(ticker.ts || ticker.systemTime || Date.now());
+  if (!Number.isFinite(last) || last <= 0) throw new Error("Ticker price unavailable");
+  return {
+    last,
+    change24h: Number.isFinite(change24h) ? change24h : null,
+    ts: Number.isFinite(ts) ? ts : Date.now(),
+  };
+}
+
 async function fetchBitgetOrderBook(pairKey) {
-  const url = `https://api.bitget.com/api/v2/spot/market/orderbook?symbol=${pairKey}&type=step0&limit=50`;
+  const url = `https://api.bitget.com/api/v2/mix/market/merge-depth?symbol=${pairKey}&productType=usdt-futures&precision=scale0&limit=50`;
   const payload = await fetchJsonWithTimeout(url);
   if (payload.code !== "00000" || !payload.data) {
     throw new Error(payload.msg || "Unexpected Bitget orderbook payload");
@@ -942,6 +1094,7 @@ function renderProvenanceTape() {
 function renderSystemMonitor() {
   const items = [
     ["monitorCandles", state.latencies.candles == null ? "--" : `${state.latencies.candles}ms`],
+    ["monitorTicker", state.latencies.ticker == null ? "--" : `${state.latencies.ticker}ms`],
     ["monitorBook", state.latencies.book == null ? "--" : `${state.latencies.book}ms`],
     ["monitorRefresh", t(state.refreshMode)],
     ["monitorMarket", currentMarketKey()],
@@ -949,6 +1102,186 @@ function renderSystemMonitor() {
   $("systemMonitor").innerHTML = items
     .map(([label, value]) => `<div class="monitor-item"><span>${t(label)}</span><strong>${value}</strong></div>`)
     .join("");
+}
+
+function currentPrice() {
+  return state.marketPrice?.last || state.series.at(-1) || 0;
+}
+
+function addThesisEvent(titleKey, bodyKey, replacements = {}) {
+  state.thesisEvents.unshift({ time: shortTime(), titleKey, bodyKey, replacements });
+  state.thesisEvents = state.thesisEvents.slice(0, 8);
+  renderThesisTimeline();
+}
+
+function renderThesisTimeline() {
+  const timeline = $("thesisTimeline");
+  if (!timeline) return;
+  if (!state.thesisEvents.length) {
+    timeline.innerHTML = `<li><span>${t("timelineScan")}</span><p>${t("timelineEmpty")}</p></li>`;
+    return;
+  }
+  timeline.innerHTML = state.thesisEvents
+    .map((event) => `<li><em>${event.time}</em><span>${t(event.titleKey)}</span><p>${t(event.bodyKey, event.replacements)}</p></li>`)
+    .join("");
+}
+
+function arenaConsensus() {
+  const counts = state.arena.reduce((acc, agent) => {
+    acc[agent.side] = (acc[agent.side] || 0) + 1;
+    return acc;
+  }, {});
+  if ((counts.LONG || 0) > Math.max(counts.SHORT || 0, counts.WAIT || 0)) return "LONG";
+  if ((counts.SHORT || 0) > Math.max(counts.LONG || 0, counts.WAIT || 0)) return "SHORT";
+  return "WAIT";
+}
+
+function consensusLabel(side) {
+  if (side === "LONG") return t("arenaLong");
+  if (side === "SHORT") return t("arenaShort");
+  return t("arenaWait");
+}
+
+function buildArenaAgents(plan) {
+  const data = state.series;
+  const recent = data.slice(-18);
+  const price = currentPrice();
+  const first = recent[0] || data[0] || price;
+  const recentHigh = Math.max(...recent, price);
+  const recentLow = Math.min(...recent, price);
+  const avg = average(recent.length ? recent : [price]);
+  const slope = first ? (price - first) / first : 0;
+  const range = Math.max(recentHigh - recentLow, price * 0.004);
+  const highDistance = (recentHigh - price) / range;
+  const lowDistance = (price - recentLow) / range;
+  const book = bookStats();
+  const spreadOk = !book || book.spreadBps < 9;
+  const trendSide = Math.abs(slope) < 0.004 ? "WAIT" : slope > 0 ? "LONG" : "SHORT";
+  const meanSide = lowDistance < 0.28 ? "LONG" : highDistance < 0.28 ? "SHORT" : "WAIT";
+  const breakSide = highDistance < 0.18 ? "LONG" : lowDistance < 0.18 ? "SHORT" : "WAIT";
+  const riskSide = plan.side !== "WAIT" && plan.rr >= 1.35 && spreadOk ? plan.side : "WAIT";
+  return [
+    { role: "trendHunter", side: trendSide, confidence: clamp(52 + Math.abs(slope) * 1800, 45, 92), reason: trendSide === "LONG" ? "trendHunterLong" : trendSide === "SHORT" ? "trendHunterShort" : "trendHunterWait" },
+    { role: "meanReversion", side: meanSide, confidence: clamp(48 + Math.abs(price - avg) / Math.max(avg, 1) * 2600, 42, 88), reason: meanSide === "LONG" ? "meanReversionLong" : meanSide === "SHORT" ? "meanReversionShort" : "meanReversionWait" },
+    { role: "breakoutScout", side: breakSide, confidence: clamp(46 + (1 - Math.min(highDistance, lowDistance)) * 42, 42, 90), reason: breakSide === "LONG" ? "breakoutScoutLong" : breakSide === "SHORT" ? "breakoutScoutShort" : "breakoutScoutWait" },
+    { role: "riskOfficer", side: riskSide, confidence: clamp(plan.confidence - (spreadOk ? 0 : 16), 35, 91), reason: riskSide === "LONG" ? "riskOfficerLong" : riskSide === "SHORT" ? "riskOfficerShort" : "riskOfficerWait" },
+  ];
+}
+
+function renderAgentArena() {
+  const list = $("arenaAgents");
+  if (!list) return;
+  if (!state.plan || !state.arena.length) {
+    $("arenaBadge").textContent = "--";
+    list.innerHTML = `<div class="arena-empty">${t("arenaEmpty")}</div>`;
+    return;
+  }
+  const consensus = arenaConsensus();
+  const score = Math.round(average(state.arena.map((agent) => agent.confidence)));
+  $("arenaBadge").textContent = `${consensusLabel(consensus)} ${score}`;
+  list.innerHTML = state.arena
+    .map((agent) => {
+      const tone = agent.side === "LONG" ? "long" : agent.side === "SHORT" ? "short" : "wait";
+      return `
+        <div class="arena-agent ${tone}">
+          <div>
+            <strong>${t(agent.role)}</strong>
+            <span>${sideLabel(agent.side)} · ${Math.round(agent.confidence)}%</span>
+          </div>
+          <p>${t(agent.reason)}</p>
+          <i style="--agent-score:${Math.round(agent.confidence)}%"></i>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function renderMindMap() {
+  const list = $("mindList");
+  if (!list) return;
+  if (!state.plan) {
+    list.innerHTML = `<div class="mind-card"><p>${t("mindEmpty")}</p></div>`;
+    return;
+  }
+  const recent = state.series.slice(-16);
+  const low = Math.min(...recent);
+  const high = Math.max(...recent);
+  const plan = state.plan;
+  const rows =
+    plan.side === "WAIT"
+      ? [["mindWait", t("mindWaitBody", { low: money(low), high: money(high) })], ["mindReduce", t("mindReduceBody")]]
+      : [
+          ["mindStop", t(plan.side === "LONG" ? "mindStopLong" : "mindStopShort", { price: money(plan.stop) })],
+          ["mindTarget", t(plan.side === "LONG" ? "mindTargetLong" : "mindTargetShort", { price: money(plan.target1) })],
+          ["mindReduce", t("mindReduceBody")],
+        ];
+  list.innerHTML = rows
+    .map(([label, body]) => `<div class="mind-card"><span>${t(label)}</span><p>${body}</p></div>`)
+    .join("");
+}
+
+function positionPnl(position, mark) {
+  if (!position || !mark) return 0;
+  return (position.side === "LONG" ? mark - position.entry : position.entry - mark) * position.size;
+}
+
+function updateLivePosition({ closeReason = null } = {}) {
+  const position = state.livePosition;
+  if (!position || position.status !== "open") return;
+  const mark = currentPrice();
+  if (!mark) return;
+  position.mark = mark;
+  position.unrealized = positionPnl(position, mark);
+  const hitStop = position.side === "LONG" ? mark <= position.stop : mark >= position.stop;
+  const hitTarget = position.side === "LONG" ? mark >= position.target : mark <= position.target;
+  if (closeReason || hitStop || hitTarget) {
+    position.status = "closed";
+    position.exit = mark;
+    position.exitReason = closeReason || (hitTarget ? "takeProfit" : "stopLoss");
+    position.realized = position.unrealized;
+    state.sessionPnl += position.realized;
+    $("sessionPnl").textContent = money(state.sessionPnl);
+    $("sessionPnl").className = state.sessionPnl >= 0 ? "positive" : "negative";
+    state.orders.unshift({
+      time: nowTime(),
+      pair: pairProfiles[position.pairKey].label,
+      side: position.side,
+      entry: position.entry,
+      exit: position.exit,
+      pnl: position.realized,
+      exitReason: position.exitReason,
+    });
+    renderOrders();
+    addThesisEvent("timelineClose", "timelineCloseBody", { exitReason: t(position.exitReason), exit: money(position.exit) });
+  }
+}
+
+function renderLivePosition() {
+  const board = $("positionBoard");
+  if (!board) return;
+  const position = state.livePosition;
+  if (!position) {
+    $("positionTitle").textContent = t("positionIdle");
+    $("positionBadge").textContent = "FLAT";
+    $("positionBadge").className = "badge";
+    board.innerHTML = `<div class="position-empty">${t("noPositionBody")}</div>`;
+    return;
+  }
+  const mark = currentPrice() || position.mark || position.entry;
+  const pnl = position.status === "closed" ? position.realized : positionPnl(position, mark);
+  const stopDistance = Math.abs(mark - position.stop) / mark * 100;
+  const targetDistance = Math.abs(position.target - mark) / mark * 100;
+  $("positionTitle").textContent = t(position.status === "open" ? "positionActive" : "positionClosed");
+  $("positionBadge").textContent = position.status === "open" ? sideLabel(position.side) : t(position.exitReason || "timeExit");
+  $("positionBadge").className = `badge ${pnl >= 0 ? "good" : "bad"}`;
+  board.innerHTML = `
+    <div><span>${t("entry")}</span><strong>${money(position.entry)}</strong></div>
+    <div><span>${t("markPrice")}</span><strong>${money(mark)}</strong></div>
+    <div><span>${t("unrealizedPnl")}</span><strong class="${pnl >= 0 ? "positive" : "negative"}">${money(pnl)}</strong></div>
+    <div><span>${t("distanceToStop")}</span><strong>${stopDistance.toFixed(2)}%</strong></div>
+    <div><span>${t("distanceToTarget")}</span><strong>${targetDistance.toFixed(2)}%</strong></div>
+    <div><span>${t("positionSize")}</span><strong>${position.size.toFixed(4)}</strong></div>
+  `;
 }
 
 function runwayStatusClass(step) {
@@ -1497,16 +1830,23 @@ function generatePlan() {
   const risk = Number($("riskSlider").value);
   const mode = $("modeSelect").value;
   const data = state.series;
-  const last = data.at(-1);
-  const first = data[0];
-  const change = (last - first) / first;
-  const recent = data.slice(-16);
+  const last = state.marketPrice?.last || data.at(-1);
+  const recent = data.slice(-24);
+  const first = recent[0] || data[0];
+  const change = first ? (last - first) / first : 0;
   const recentHigh = Math.max(...recent);
   const recentLow = Math.min(...recent);
-  const momentum = last > recent.reduce((a, b) => a + b, 0) / recent.length;
-  const bullish = change > 0.006 && momentum;
-  const bearish = change < -0.006 && !momentum;
-  const side = bullish ? "LONG" : bearish ? "SHORT" : "WAIT";
+  const fast = data.slice(-8);
+  const slowAvg = average(recent);
+  const fastAvg = average(fast);
+  const range = Math.max(recentHigh - recentLow, last * 0.004);
+  const nearHigh = (recentHigh - last) / range < 0.24;
+  const nearLow = (last - recentLow) / range < 0.24;
+  const momentum = fastAvg >= slowAvg;
+  const bullish = (change > 0.0018 && momentum) || (nearHigh && change > -0.002);
+  const bearish = (change < -0.0018 && !momentum) || (nearLow && change < 0.002);
+  const quietRange = Math.abs(change) < 0.0008 && !nearHigh && !nearLow;
+  const side = bullish ? "LONG" : bearish ? "SHORT" : mode === "conservative" && quietRange ? "WAIT" : momentum ? "LONG" : "SHORT";
   const stats = candleStats();
   const realizedVolatility = Math.max(profile.volatility * 0.65, stats.avgRange);
   const volatility = realizedVolatility * (mode === "aggressive" ? 1.15 : mode === "conservative" ? 0.85 : 1);
@@ -1536,10 +1876,20 @@ function generatePlan() {
   };
   state.plan.thesis = buildThesis(state.plan);
   state.passportIssued = false;
+  state.arena = buildArenaAgents(state.plan);
 
   updatePlanUI();
   updateDeskUI();
+  renderAgentArena();
+  renderMindMap();
+  renderLivePosition();
   drawChart();
+  addThesisEvent("timelinePlan", "timelinePlanBody", {
+    side: sideLabel(side),
+    entry: money(entry),
+    confidence,
+    consensus: consensusLabel(arenaConsensus()),
+  });
   logDecision(
     t("planGeneratedTitle", { side: sideLabel(side) }),
     t("planGeneratedBody", { pair: profile.label, timeframe: timeframeLabel(), confidence, risk })
@@ -1603,10 +1953,11 @@ function buildGate(plan) {
   const vetoes = votes.filter((vote) => vote.vote === "veto").length;
   const cautions = votes.filter((vote) => vote.vote === "caution").length + stress.filter((item) => item.status === "watch").length;
   const failures = stress.filter((item) => item.status === "fail").length;
-  if (plan.side === "WAIT" || vetoes > 0 || failures > 0) {
+  const arenaAligned = state.arena.filter((agent) => agent.side === plan.side).length >= 2;
+  if (plan.side === "WAIT" || failures > 0 || (vetoes > 1 && !arenaAligned)) {
     return { decision: "vetoTrade", score: 22, reason: "gateVeto" };
   }
-  if (cautions > 1 || plan.confidence < 72) {
+  if (cautions > 1 || vetoes > 0 || plan.confidence < 72) {
     return { decision: "cautionTrade", score: 58, reason: "gateCaution" };
   }
   return { decision: "allowTrade", score: 88, reason: "gateAllow" };
@@ -1617,6 +1968,7 @@ function updateDeskUI() {
     state.council = [];
     state.stress = [];
     state.gate = null;
+    state.arena = [];
     setTone(document.querySelector(".gate-panel"), ["good", "watch", "bad"], "");
     $("gateBadge").className = "badge";
     $("gateDecision").textContent = t("noDecision");
@@ -1625,6 +1977,8 @@ function updateDeskUI() {
     $("gateMeter").style.width = "0%";
     $("councilList").innerHTML = emptyDeskCard(t("waitingScan"));
     $("stressList").innerHTML = emptyDeskCard(t("gateReasonEmpty"));
+    renderAgentArena();
+    renderMindMap();
     renderEdgeDecomposer();
     renderRealityHarness();
     renderDemoRunway();
@@ -1632,7 +1986,7 @@ function updateDeskUI() {
   }
 
   const first = state.series[0];
-  const last = state.series.at(-1);
+  const last = state.marketPrice?.last || state.series.at(-1);
   const change = (last - first) / first;
   state.council = buildCouncil(state.plan, change);
   state.stress = buildStress(state.plan);
@@ -1740,8 +2094,8 @@ function updateMarketUI({ preservePlan = false } = {}) {
     state.passportIssued = false;
   }
   const first = state.series[0];
-  const last = state.series.at(-1);
-  const change = ((last - first) / first) * 100;
+  const last = state.marketPrice?.last || state.series.at(-1);
+  const change = state.marketPrice?.change24h != null ? state.marketPrice.change24h * 100 : ((last - first) / first) * 100;
   $("pairTitle").textContent = profile.label;
   $("lastPrice").textContent = money(last);
   flashPrice();
@@ -1760,10 +2114,15 @@ function updateMarketUI({ preservePlan = false } = {}) {
     updateDeskUI();
   }
   updateDataSourceLabel();
+  updateLivePosition();
   renderFingerprint();
   renderOrderBook();
   renderRegimeMap();
   renderPassport();
+  renderAgentArena();
+  renderMindMap();
+  renderLivePosition();
+  renderThesisTimeline();
   drawChart();
 }
 
@@ -1786,24 +2145,43 @@ async function loadMarketData({ log = false, preservePlan = false, allowStale = 
     state.gate = null;
     state.council = [];
     state.stress = [];
+    state.arena = [];
+    state.livePosition = null;
+    state.thesisEvents = [];
     state.passportIssued = false;
     updatePlanUI();
     updateDeskUI();
     renderPassport();
   }
   try {
-    const [candles, orderBook] = await Promise.all([
+    const [candles, ticker, orderBook] = await Promise.all([
       timed("candles", () => fetchBitgetCandles(pairKey)),
+      timed("ticker", () => fetchBitgetTicker(pairKey)).catch(() => null),
       timed("book", () => fetchBitgetOrderBook(pairKey)).catch(() => null),
     ]);
     if (requestId !== state.activeRequestId || requestKey !== currentMarketKey()) return;
     setCandles(candles);
+    state.marketPrice = ticker;
     state.orderBook = orderBook;
     state.dataSource = "bitget";
     state.marketKey = requestKey;
     state.lastUpdated = shortTime();
     if (log) {
       logDecision(t("dataLoadedTitle"), t("dataLoadedBody", { pair: profile.label, count: state.series.length }));
+    }
+    if (!preservePlan && !state.thesisEvents.length) {
+      addThesisEvent("timelineScan", "timelineScanBody", { pair: profile.label });
+    }
+    if (!log && state.livePosition?.status === "open") {
+      const mark = ticker?.last || state.series.at(-1);
+      const pressure =
+        state.livePosition.side === "LONG"
+          ? mark < state.livePosition.entry
+          : mark > state.livePosition.entry;
+      addThesisEvent("timelineRefresh", "timelineRefreshBody", {
+        price: money(mark),
+        state: t(pressure ? "thesisThreatened" : "thesisHealthy"),
+      });
     }
   } catch (error) {
     if (requestId !== state.activeRequestId || requestKey !== currentMarketKey()) return;
@@ -1814,6 +2192,7 @@ async function loadMarketData({ log = false, preservePlan = false, allowStale = 
       }
     } else {
       setCandles(buildCandles(pairKey));
+      state.marketPrice = null;
       state.orderBook = null;
       state.dataSource = "fallback";
       state.marketKey = requestKey;
@@ -1909,36 +2288,28 @@ function runPaperTrade() {
   }
 
   setStatus("simulating");
-  const path = buildForwardPath(plan);
-  const result = resolvePaperTrade(plan, path);
-  const exit = result.exit;
-  const pnl = (plan.side === "LONG" ? exit - plan.entry : plan.entry - exit) * plan.size;
-  state.sessionPnl += pnl;
-
-  state.orders.unshift({
-    time: nowTime(),
-    pair: pairProfiles[plan.pairKey].label,
+  state.livePosition = {
+    pairKey: plan.pairKey,
     side: plan.side,
-    entry: plan.entry,
-    exit,
-    pnl,
-    exitReason: result.exitReason,
-  });
-
-  renderOrders();
-  $("sessionPnl").textContent = money(state.sessionPnl);
-  $("sessionPnl").className = state.sessionPnl >= 0 ? "positive" : "negative";
+    entry: currentPrice() || plan.entry,
+    stop: plan.stop,
+    target: plan.target1,
+    size: plan.size,
+    mark: currentPrice() || plan.entry,
+    unrealized: 0,
+    status: "open",
+    openedAt: nowTime(),
+  };
+  updateLivePosition();
+  renderLivePosition();
   setStatus("ready");
+  addThesisEvent("timelineDeploy", "timelineDeployBody", {
+    side: sideLabel(plan.side),
+    entry: money(state.livePosition.entry),
+  });
   logDecision(
-    t("tradeClosedTitle"),
-    t("tradeClosedBody", {
-      side: sideLabel(plan.side),
-      pair: pairProfiles[plan.pairKey].label,
-      exit: money(exit),
-      exitReason: t(result.exitReason),
-      result: t(pnl >= 0 ? "profit" : "loss"),
-      pnl: money(pnl),
-    })
+    t("timelineDeploy"),
+    t("timelineDeployBody", { side: sideLabel(plan.side), entry: money(state.livePosition.entry) })
   );
   renderDemoRunway();
 }
@@ -1990,10 +2361,12 @@ function renderOrders() {
 
 function resetSession() {
   state.orders = [];
+  state.livePosition = null;
   state.sessionPnl = 0;
   $("sessionPnl").textContent = "$0.00";
   $("sessionPnl").className = "";
   renderOrders();
+  renderLivePosition();
   logDecision(t("resetTitle"), t("resetBody"));
   renderDemoRunway();
 }
@@ -2025,6 +2398,10 @@ function applyLanguage(lang) {
   renderRegimeMap();
   renderEdgeDecomposer();
   renderRealityHarness();
+  renderAgentArena();
+  renderMindMap();
+  renderLivePosition();
+  renderThesisTimeline();
   renderPassport();
   renderOrders();
   renderDemoRunway();

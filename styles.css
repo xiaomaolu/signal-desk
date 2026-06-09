@@ -787,6 +787,13 @@ input:focus-visible {
   gap: 18px;
 }
 
+.arena-grid,
+.thesis-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.9fr);
+  gap: 18px;
+}
+
 .bottom-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.9fr);
@@ -1693,6 +1700,199 @@ canvas {
   line-height: 1.45;
 }
 
+.arena-agents {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 0 18px 18px;
+}
+
+.arena-empty,
+.position-empty {
+  grid-column: 1 / -1;
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: #11161b;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.arena-agent {
+  min-height: 156px;
+  display: grid;
+  align-content: space-between;
+  gap: 12px;
+  padding: 13px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    #11161b;
+  position: relative;
+  overflow: hidden;
+}
+
+.arena-agent::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: currentColor;
+}
+
+.arena-agent.long {
+  color: var(--green);
+}
+
+.arena-agent.short {
+  color: var(--red);
+}
+
+.arena-agent.wait {
+  color: var(--amber);
+}
+
+.arena-agent strong,
+.arena-agent span,
+.arena-agent p {
+  position: relative;
+  z-index: 1;
+}
+
+.arena-agent strong {
+  display: block;
+  color: var(--text);
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.arena-agent span {
+  color: currentColor;
+  font-size: 12px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.arena-agent p {
+  color: #d7dee8;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.arena-agent i {
+  display: block;
+  height: 6px;
+  width: var(--agent-score);
+  background: currentColor;
+  box-shadow: 0 0 18px currentColor;
+  transition: width 0.45s ease;
+}
+
+.position-board {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  margin: 0 18px 18px;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+
+.position-board > div {
+  min-height: 78px;
+  display: grid;
+  align-content: space-between;
+  gap: 10px;
+  padding: 12px;
+  background: #11161b;
+}
+
+.position-board span,
+.mind-card span {
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 800;
+}
+
+.position-board strong {
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.mind-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 0 18px 18px;
+}
+
+.mind-card {
+  min-height: 116px;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 13px;
+  border: 1px solid var(--line);
+  background: #11161b;
+}
+
+.mind-card p {
+  color: #d7dee8;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.thesis-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 18px 18px;
+  display: grid;
+  gap: 10px;
+  max-height: 286px;
+  overflow: auto;
+}
+
+.thesis-timeline li {
+  padding: 12px 12px 12px 16px;
+  border: 1px solid var(--line);
+  background: #11161b;
+  position: relative;
+}
+
+.thesis-timeline li::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  background: var(--cyan);
+}
+
+.thesis-timeline em {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  font-style: normal;
+  margin-bottom: 5px;
+}
+
+.thesis-timeline span {
+  display: block;
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.thesis-timeline p {
+  color: #d7dee8;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
 .edge-list {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1996,6 +2196,8 @@ th {
 
   .topbar,
   .market-grid,
+  .arena-grid,
+  .thesis-grid,
   .fingerprint-grid,
   .book-grid,
   .context-grid,
@@ -2014,6 +2216,11 @@ th {
   .edge-list {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .arena-agents,
+  .mind-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 720px) {
@@ -2029,12 +2236,15 @@ th {
   .project-modal-grid,
   .drill-board,
   .book-stats,
-    .risk-radar,
-    .runway-steps,
-    .context-board,
-    .context-meter,
-    .regime-board,
+  .risk-radar,
+  .runway-steps,
+  .context-board,
+  .context-meter,
+  .regime-board,
   .regime-readout,
+  .arena-agents,
+  .position-board,
+  .mind-list,
   .edge-list,
   .harness-stats,
   .shock-controls,
