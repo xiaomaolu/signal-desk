@@ -820,6 +820,12 @@ input:focus-visible {
   grid-template-columns: 1fr;
 }
 
+.persona-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+  gap: 18px;
+}
+
 .regime-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1467,6 +1473,73 @@ canvas {
 .headline-item strong {
   margin-bottom: 0;
   text-align: right;
+}
+
+.persona-card,
+.macro-board,
+.macro-events {
+  display: grid;
+  gap: 12px;
+}
+
+.persona-row,
+.macro-summary,
+.macro-event {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(15, 19, 24, 0.48);
+  padding: 14px;
+}
+
+.persona-row span,
+.macro-summary span,
+.macro-event span,
+.macro-event em {
+  color: var(--muted);
+}
+
+.persona-row p,
+.macro-summary strong,
+.macro-event p {
+  margin-top: 6px;
+}
+
+.macro-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.macro-event-top,
+.macro-event-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.macro-event p {
+  line-height: 1.55;
+  color: #d7dee8;
+}
+
+.macro-event-meta {
+  margin-top: 10px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.macro-event.live {
+  border-color: rgba(255, 95, 102, 0.42);
+  background: rgba(255, 95, 102, 0.06);
+}
+
+.macro-event.next {
+  border-color: rgba(246, 199, 96, 0.42);
+}
+
+.macro-event.recent {
+  border-color: rgba(101, 165, 255, 0.42);
 }
 
 .regime-board {
@@ -2201,6 +2274,7 @@ th {
   .fingerprint-grid,
   .book-grid,
   .context-grid,
+  .persona-grid,
   .regime-grid,
   .evidence-grid,
   .passport-grid,
@@ -2240,6 +2314,7 @@ th {
   .runway-steps,
   .context-board,
   .context-meter,
+  .macro-summary,
   .regime-board,
   .regime-readout,
   .arena-agents,
