@@ -63,6 +63,108 @@ const pairProfiles = {
       zh: "能直观看到跨市场压力会先打到更薄的流动性。",
     },
   },
+  AAPLUSDT: {
+    label: "AAPL/USDT",
+    base: 205.4,
+    bias: 0.14,
+    volatility: 0.016,
+    liquidity: "deep",
+    news: "megaCapRates",
+    assetClass: "stock",
+    macroLens: {
+      en: "Mega-cap duration proxy. Very sensitive to FOMC, real yields, and valuation compression.",
+      zh: "大型科技久期代理。对 FOMC、实际利率和估值压缩非常敏感。",
+    },
+    crossMarket: {
+      en: "Lets the desk express the same macro thesis on a cleaner rates-sensitive equity proxy.",
+      zh: "让风控台能用更纯粹的利率敏感权益代理，表达同一套宏观观点。",
+    },
+  },
+  NVDAUSDT: {
+    label: "NVDA/USDT",
+    base: 141.8,
+    bias: 0.26,
+    volatility: 0.028,
+    liquidity: "strong",
+    news: "aiCapex",
+    assetClass: "stock",
+    macroLens: {
+      en: "AI leadership proxy. Strong when growth and capex survive the macro window.",
+      zh: "AI 龙头代理。只有在宏观窗口过去后，成长和资本开支逻辑还成立时才更强。",
+    },
+    crossMarket: {
+      en: "Pairs naturally with Micron earnings and semiconductor cycle confirmation.",
+      zh: "和美光财报、半导体景气确认天然联动。",
+    },
+  },
+  TSLAUSDT: {
+    label: "TSLA/USDT",
+    base: 179.3,
+    bias: 0.24,
+    volatility: 0.033,
+    liquidity: "strong",
+    news: "betaShock",
+    assetClass: "stock",
+    macroLens: {
+      en: "High-beta retail favorite. Useful for testing whether the market still wants speculative duration.",
+      zh: "高 beta 的散户偏爱品种，适合检验市场是否还愿意持有投机型久期资产。",
+    },
+    crossMarket: {
+      en: "Gets hit hardest when rates rise and crowding unwinds.",
+      zh: "利率上行、拥挤交易退潮时，往往最先受压。",
+    },
+  },
+  MSFTUSDT: {
+    label: "MSFT/USDT",
+    base: 462.7,
+    bias: 0.12,
+    volatility: 0.015,
+    liquidity: "deep",
+    news: "cloudDefensive",
+    assetClass: "stock",
+    macroLens: {
+      en: "Quality growth anchor. Useful when the desk wants tech beta with slightly better defensiveness.",
+      zh: "高质量成长锚点。适合在还想保留科技 beta、但想更防守一点时使用。",
+    },
+    crossMarket: {
+      en: "Helps separate AI quality leadership from the more crowded speculative names.",
+      zh: "能把 AI 质量龙头和更拥挤的投机名字区分开。",
+    },
+  },
+  METAUSDT: {
+    label: "META/USDT",
+    base: 701.5,
+    bias: 0.18,
+    volatility: 0.022,
+    liquidity: "deep",
+    news: "adMomentum",
+    assetClass: "stock",
+    macroLens: {
+      en: "Ad-cycle and AI multiple proxy. Strong when growth optimism survives policy fear.",
+      zh: "广告周期与 AI 估值代理。只有在政策恐惧下成长预期仍成立时才更强。",
+    },
+    crossMarket: {
+      en: "Good read-through for whether large-cap tech breadth is broadening or narrowing.",
+      zh: "适合观察大型科技的广度是在扩散还是继续收缩到少数龙头。",
+    },
+  },
+  COINUSDT: {
+    label: "COIN/USDT",
+    base: 254.2,
+    bias: 0.29,
+    volatility: 0.036,
+    liquidity: "moderate",
+    news: "cryptoEquityBridge",
+    assetClass: "stock",
+    macroLens: {
+      en: "Bridge asset between crypto and equities. Great for cross-market contagion reads.",
+      zh: "连接加密和美股的桥梁资产，非常适合做跨市场传染的观察。",
+    },
+    crossMarket: {
+      en: "Tells the desk whether crypto risk is being accepted by equity investors too.",
+      zh: "能看出股票投资者是否也在接受同样的加密风险偏好。",
+    },
+  },
 };
 
 const godotPersona = {
@@ -363,6 +465,9 @@ const translations = {
     fallbackHeadline1: "BTC and ETH flows remain the primary driver for broad crypto risk appetite.",
     fallbackHeadline2: "Altcoin beta remains sensitive to liquidity shifts and fast leverage resets.",
     fallbackHeadline3: "Desk keeps context cautious when live news cannot be reached from the browser.",
+    stockFallbackHeadline1: "Mega-cap tech remains highly sensitive to rates repricing around FOMC and inflation data.",
+    stockFallbackHeadline2: "Semis and AI leaders need earnings and capex follow-through to defend rich multiples.",
+    stockFallbackHeadline3: "Desk treats stock-perp setups as macro proxies first, not pure chart trades.",
     regimeMap: "Regime Map",
     regimeTrend: "Trend",
     regimeVol: "Volatility",
@@ -432,6 +537,12 @@ const translations = {
     l2Fees: "L2 fees cooling",
     developerActivity: "Developer activity rising",
     rangeFlows: "Range-bound flows",
+    megaCapRates: "Mega-cap rates repricing",
+    aiCapex: "AI capex still in focus",
+    betaShock: "High-beta equity stress",
+    cloudDefensive: "Cloud leadership holding up",
+    adMomentum: "Ad and AI momentum mixed",
+    cryptoEquityBridge: "Crypto-equity bridge active",
     noPlanThesis: "Choose a pair and run analysis to generate a trade plan with risk controls.",
     waitThesis: "{pair} is not offering enough asymmetry. The context layer marks {news}, but price is still inside the recent range between {low} and {high}. Best action: wait for a breakout or reclaim.",
     tradeThesis: "{pair} is showing {direction} with {liquidity} liquidity. The context layer marks {news}. The plan uses a defined stop and staged targets before any live execution is considered.",
@@ -767,6 +878,9 @@ const translations = {
     fallbackHeadline1: "BTC 与 ETH 资金流仍是整体加密风险偏好的主要驱动。",
     fallbackHeadline2: "山寨币 beta 对流动性变化和杠杆快速出清较敏感。",
     fallbackHeadline3: "浏览器无法访问实时新闻时，风控台会把上下文标记为谨慎备用状态。",
+    stockFallbackHeadline1: "大型科技在 FOMC 与通胀数据附近，对利率重定价非常敏感。",
+    stockFallbackHeadline2: "半导体与 AI 龙头需要财报和资本开支继续验证，才能支撑高估值。",
+    stockFallbackHeadline3: "风控台会先把股票永续当作宏观代理，而不是纯图形交易。",
     regimeMap: "市场状态地图",
     regimeTrend: "趋势",
     regimeVol: "波动",
@@ -836,6 +950,12 @@ const translations = {
     l2Fees: "L2 费用回落",
     developerActivity: "开发者活跃度上升",
     rangeFlows: "资金流处于区间震荡",
+    megaCapRates: "大型科技受利率重定价影响",
+    aiCapex: "AI 资本开支仍是焦点",
+    betaShock: "高 beta 美股承压",
+    cloudDefensive: "云计算龙头更偏防守",
+    adMomentum: "广告与 AI 动能分化",
+    cryptoEquityBridge: "加密-股票桥梁活跃",
     noPlanThesis: "选择交易对并运行分析，生成带有风险控制的交易计划。",
     waitThesis: "{pair} 目前没有提供足够好的风险回报。上下文层标记为{news}，但价格仍在 {low} 到 {high} 的近期区间内。最佳动作：等待突破或重新站回关键位。",
     tradeThesis: "{pair} 正呈现{direction}，流动性{liquidity}。上下文层标记为{news}。计划先定义止损与分批目标，在考虑真实执行前完成风险约束。",
@@ -1047,6 +1167,10 @@ function timeframeLabel() {
 
 function newsText(profile) {
   return state.context.headlines[0]?.title || t(profile.news);
+}
+
+function isStockPair(pairKey) {
+  return pairProfiles[pairKey]?.assetClass === "stock";
 }
 
 function liquidityText(profile) {
@@ -1267,10 +1391,11 @@ async function fetchCryptoHeadlines() {
 }
 
 function fallbackHeadlines() {
+  const stockMode = isStockPair($("pairSelect").value);
   return [
-    { title: t("fallbackHeadline1"), source: "Signal Desk", url: "" },
-    { title: t("fallbackHeadline2"), source: "Signal Desk", url: "" },
-    { title: t("fallbackHeadline3"), source: "Signal Desk", url: "" },
+    { title: t(stockMode ? "stockFallbackHeadline1" : "fallbackHeadline1"), source: "Signal Desk", url: "" },
+    { title: t(stockMode ? "stockFallbackHeadline2" : "fallbackHeadline2"), source: "Signal Desk", url: "" },
+    { title: t(stockMode ? "stockFallbackHeadline3" : "fallbackHeadline3"), source: "Signal Desk", url: "" },
   ];
 }
 
